@@ -1,0 +1,17 @@
+.container {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 0.5fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    height: 100px;
+    background-color: blue;
+}
+
+.header-column-side {
+    background-color: yellow;
+}
+
+.header-column-main {
+    background-color: black;
+}
