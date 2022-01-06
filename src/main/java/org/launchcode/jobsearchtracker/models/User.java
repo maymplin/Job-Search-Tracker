@@ -23,6 +23,8 @@ public class User extends AbstractEntity {
     @Min(0)
     private int dailyGoal = 0;
 
+    private boolean enabled;
+
     public User() {
     }
 
@@ -64,5 +66,13 @@ public class User extends AbstractEntity {
 
     public void setDailyGoal(int dailyGoal) {
         this.dailyGoal = dailyGoal;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
