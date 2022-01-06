@@ -6,12 +6,9 @@
 <header th:replace="fragments :: header"></header>
 
 
-<h3 th:inline="text">Welcome back! [[${#httpServletRequest.remoteUser}]]!</h3>
+<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h3>
 
-<!--https://yatheesanc9.medium.com/spring-boot-with-google-sign-in-8e304dbe936e-->
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+<form th:replace="fragments :: logout"></form>
 
 </body>
 </html>
