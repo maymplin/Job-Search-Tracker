@@ -58,21 +58,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers("/", "/login", "/oauth/**").permitAll()
+                .csrf().disable()
+                .antMatcher("/**").authorizeRequests()
+                .antMatchers("/*").authenticated()
                 .anyRequest().authenticated()
-//                .and()
-//                .formLogin().permitAll()
                 .and()
-                .oauth2Login()
-                .loginPage("/login")
-                .userInfoEndpoint()
-                .userService(oauthUserService)
-//        http
+                .oauth2Login().permitAll()
+                .defaultSuccessUrl("/index", true)
+//                .authorizeRequests()
+//                .antMatchers("/", "/login", "/oauth/**").permitAll()
+//                .anyRequest().authenticated()
+////                .and()
+////                .formLogin().permitAll()
+//                .and()
 //                .oauth2Login()
 //                .loginPage("/login")
-//                .userInfoEndpoint()
-//                .userService(oauthUserService)
+                .userInfoEndpoint()
+                .userService(oauthUserService)
                 .and()
                 .successHandler(new AuthenticationSuccessHandler() {
 
@@ -85,18 +87,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                         userService.processOAuthPostLogin(oauthUser.getEmail());
 
-                        response.sendRedirect("/test");
+                        response.sendRedirect("/index");
                     }
                 })
                 .and()
-                .logout().permitAll();;
-
-//        http.authorizeRequests()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin().permitAll()
-//                .and()
-//                .logout().permitAll();
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("auth_code", "JSESSIONID")
+                .and()
+                .oauth2Login();
     }
 
 

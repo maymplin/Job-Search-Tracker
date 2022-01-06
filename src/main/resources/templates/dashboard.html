@@ -5,9 +5,7 @@
 
 <header th:replace="fragments :: header"></header>
 
-<h3><p th:text="${user}"></p></h3>
-
-<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+<h3 th:inline="text">Hi [[${#httpServletRequest.remoteUser}]]</h3>
 
 
 </body>

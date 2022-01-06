@@ -3,10 +3,7 @@ package org.launchcode.jobsearchtracker.models;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity
 public class User extends AbstractEntity {
@@ -15,8 +12,8 @@ public class User extends AbstractEntity {
     @Size(min = 5, max = 20, message = "")
     private String username;
 
-    @Size(min = 2, max = 50, message = "")
-    private String displayName;
+    @Email
+    private String email;
 
     @Min(0)
     private int dailyGoal;
@@ -27,8 +24,9 @@ public class User extends AbstractEntity {
 
     public User() {}
 
-    public User(String username) {
+    public User(String username, String email) {
         this.username = username;
+        this.email = email;
     }
 
     public String getUsername() {
@@ -39,12 +37,12 @@ public class User extends AbstractEntity {
         this.username = username;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getDailyGoal() {

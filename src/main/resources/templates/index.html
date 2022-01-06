@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<!--<head th:replace="fragments :: head"></head>-->
+<head th:replace="fragments :: head"></head>
 <body class="container">
 
-<!--<header th:replace="fragments :: header"></header>-->
-
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout" />
-</form>
+<header th:replace="fragments :: header"></header>
 
 <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+
+<!--<form th:action="@{/logout}" method="post">-->
+<!--    <input type="submit" value="Logout" />-->
+<!--</form>-->
 
 </body>
 </html>
