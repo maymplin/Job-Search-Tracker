@@ -9,9 +9,9 @@ spring:
 #          facebook:
 #            client-id: < Enter Facebook App ID >
 #            client-secret: < Enter Facebook App Secret >
-#          github:
-#            client-id: < Enter Github Client ID >
-#            client-secret: < Enter Github Client Secret >
+          github:
+            client-id: 4c56795ec6bdb89b1a31
+            client-secret: 0d40b38efdfc1d8dc82c4f3193e32b547983d0c4
 #          okta:
 #            client-id: < Enter Okta Client ID >
 #            client-secret: < Enter Okta Client Secret >
