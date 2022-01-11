@@ -5,10 +5,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -34,15 +43,49 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin().permitAll()
-                .and()
-                .logout().permitAll();
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                    .antMatchers("/resources/static/**");
     }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+//                    .antMatchers("/", "/login").permitAll()
+                    // allows anyone to access a URL that begins with "/resources"
+                    // since this is where my CSS, JavaScript and images are stored
+                    // all my static resources are viewable by anyone
+//                    .antMatchers("../static/**").permitAll()
+                .anyRequest().authenticated()   // every request requires the user to be authenticated
+                .and()
+                .formLogin()    // form based authentication is supported
+                    .permitAll()
+                    .loginPage("/login")     // when authentication is required, redirect the browswer to "/login"
+                    .loginProcessingUrl("/login")
+//                    .defaultSuccessUrl("/dashboard.html", true)
+                    .successHandler(
+                            new AuthenticationSuccessHandler() {
+                                @Override
+                                public void onAuthenticationSuccess(HttpServletRequest request,
+                                                                    HttpServletResponse response,
+                                                                    Authentication authentication)
+                                        throws IOException, ServletException {
+
+                                    response.sendRedirect("/dashboard");
+                                }
+                            }
+
+                    )
+                .and()
+                .logout().permitAll()
+                .logoutSuccessUrl("/login")
+                .and()
+                .exceptionHandling().accessDeniedPage("/403");
+    }
+
+
 
     //    @Override
 //    public void configure(WebSecurity web) throws Exception {
@@ -58,7 +101,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .csrf().disable()
 //                .antMatcher("/**")
 //                .authorizeRequests()
-//                .antMatchers("/", "/index.html","/login**").permitAll()
+//                .antMatchers("/", "/login.html","/login**").permitAll()
 //                .anyRequest().authenticated()
 //                .and()
 //                .oauth2Login();

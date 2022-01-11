@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<header th:replace="fragments :: header"></header>
+<head th:replace="fragments :: head"></head>
 <body>
+    <header th:replace="fragments :: header"></header>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" />
+    </form>
     <h1>Secured Page</h1>
-    <span th:text="${#authentication.principal.attributes.name}">Joe Coder</span>
+    <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+
 </body>
 </html>
