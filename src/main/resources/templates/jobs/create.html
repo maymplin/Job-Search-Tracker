@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<header th:replace="fragments :: header"></header>
+
+<!--Create Job-->
+<form method="post" th:action="@{/jobs/create}">
+    <div class="form-group">
+        <label>Job Title
+            <input type="text" th:name="jobTitle" class="form-control" />
+<!--            <input type="text" th:field="${job.jobTitle}" class="form-control" />-->
+        </label>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Company Name
+            <input type="text" th:name="companyName" class="form-control" />
+<!--            <input type="text" th:field="${job.jobDetails.companyName}" class="form-control" />-->
+        </label>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Job Description
+            <input type="text" th:name="jobDescription" class="form-control" />
+<!--            <input type="text" th:field="${job.jobDetails.jobDescription}" class="form-control" />-->
+        </label>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>User Name
+            <input type="text" th:value="${user.username}" th:name="username" class="form-control" readonly/>
+<!--ERROR <input type="text" th:field="${job.user}" th:attr="value = ${user}" class="form-control" readonly/>-->
+        </label>
+    </div>
+    <br>
+    <div class="form-group">
+        <input type="submit" value="Create Job" class="btn btn-success">
+    </div>
+</form>
+
+</body>
+</html>

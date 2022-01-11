@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+<table class="table table-striped">
+    <tr>
+        <th>Job Title</th>
+        <td th:text="${job.jobTitle}"></td>
+    </tr>
+    <tr>
+        <th>Company Name</th>
+        <td th:text="${job.jobDetails.companyName}"></td>
+    </tr>
+    <tr>
+        <th>Job Description</th>
+        <td th:text="${job.jobDetails.jobDescription}"></td>
+    </tr>
+    <tr>
+        <th>User Name</th>
+        <td th:text="${job.user.username}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

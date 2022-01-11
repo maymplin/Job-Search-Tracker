@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+<form method="post">
+    <input type="search" name="query" placeholder="Search...">
+    <button>Search</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Job Title</th>
+        <th>Company Name</th>
+        <th>Job Description</th>
+        <th>User Name</th>
+    </tr>
+    </thead>
+    <tr th:each="job : ${jobs}">
+        <td th:text="${job.id}"></td>
+        <td><a th:href="'/jobs/job_details?jobId=' + ${job.id}" th:text="${job.jobTitle}"></a></td>
+        <td th:text="${job.jobDetails.companyName}"></td>
+        <td th:text="${job.jobDetails.jobDescription}"></td>
+        <td th:text="${job.user.username}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
