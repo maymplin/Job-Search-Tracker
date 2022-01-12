@@ -1,6 +1,8 @@
 package org.launchcode.jobsearchtracker.models;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +16,10 @@ public class User extends AbstractEntity {
     private String username;
 
     private String password;
+
+    // Added for OAuth2 authentication
+    @Enumerated(EnumType.STRING)
+    private Provider provider;
 
     private String role;
 
@@ -42,6 +48,14 @@ public class User extends AbstractEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
 
     public String getRole() {
