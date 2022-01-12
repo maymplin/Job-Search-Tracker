@@ -1,6 +1,10 @@
 package org.launchcode.jobsearchtracker;
 
+import org.launchcode.jobsearchtracker.models.CustomOAuth2User;
+import org.launchcode.jobsearchtracker.models.CustomOAuth2UserService;
 import org.launchcode.jobsearchtracker.models.MyUserDetailsService;
+import org.launchcode.jobsearchtracker.models.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -13,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +25,12 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private CustomOAuth2UserService oauthUserService;
+
+    @Autowired
+    private UserService userService;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -53,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                    .antMatchers("/", "/login").permitAll()
+                    .antMatchers("/", "/login", "/oauth2/**").permitAll()
                     // allows anyone to access a URL that begins with "/resources"
                     // since this is where my CSS, JavaScript and images are stored
                     // all my static resources are viewable by anyone
@@ -76,15 +85,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                     response.sendRedirect("/dashboard");
                                 }
                             }
-
                     )
+                .and()
+                .oauth2Login()
+                    .permitAll()
+                    .loginPage("/login")
+                    .userInfoEndpoint()
+                    .userService(oauthUserService)
+                    .and()
+                    .successHandler(new AuthenticationSuccessHandler() {
+                        @Override
+                        public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                                            Authentication authentication) throws IOException, ServletException {
+
+                            CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
+
+                            userService.processOAuthPostLogin(oAuth2User.getEmail());
+
+                            response.sendRedirect("/dashboard");
+                        }
+                    })
                 .and()
                 .logout().permitAll()
                 .logoutSuccessUrl("/login")
                 .and()
                 .exceptionHandling().accessDeniedPage("/403");
     }
-
 
 
     //    @Override
