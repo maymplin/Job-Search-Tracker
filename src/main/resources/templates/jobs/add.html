@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+    <header th:replace="fragments :: header"></header>
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <main>
+        <h4 th:text="${title}">Testing</h4>
+        <form th:action="@{/jobs/add}" method="POST">
+            <div class="form-group">
+                <label>Job Title
+                    <input type="text" th:name="jobTitle">
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Company
+                    <input type="text" th:name="company">
+                </label>
+            </div>
+<!--            <div class="form-group">-->
+<!--                <label>Listing URL-->
+<!--                    <input type="text" th:name="listingUrl">-->
+<!--                </label>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label>Listing Number-->
+<!--                    <input type="text" th:name="listingNumber">-->
+<!--                </label>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label>Job Description-->
+<!--                    <textarea th:name="jobDescription" class="form-control"></textarea>-->
+<!--                </label>-->
+<!--            </div>-->
+            <div class="form-group">
+                <input type="submit" value="Add Job Listing" class="btn btn btn-success">
+            </div>
+        </form>
+    </main>
+
+</body>
+</html>

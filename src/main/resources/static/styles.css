@@ -4,7 +4,7 @@
     grid-template-rows: 1fr;
     gap: 0px 0px;
     grid-auto-flow: row;
-    height: 50px;
+    height: 75px;
     background-color: blue;
 }
 
@@ -14,4 +14,25 @@
 
 .header-column-main {
     background-color: black;
+}
+
+.nav-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    height: 30px;
+    background-color: pink;
+}
+
+.nav-column-right {
+
+}
+
+.dashboard-container {
+    display: flex;
+}
+
+.dashboard-goals {
 }

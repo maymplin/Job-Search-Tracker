@@ -3,11 +3,38 @@
 <head th:replace="fragments :: head"></head>
 <body>
     <header th:replace="fragments :: header"></header>
-    <form th:action="@{/logout}" method="POST">
-        <input type="submit" value="Logout" />
-    </form>
-    <h1>Secured Page</h1>
-    <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+    <nav th:replace="fragments :: navigation"></nav>
+<!--    <form th:action="@{/logout}" method="POST">-->
+<!--        <input type="submit" value="Logout" />-->
+<!--    </form>-->
+    <main>
+        <div class="dashboard-container">
+            <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+            <br />
+            <div class="dashboard-goals">
+                <p>Today you sent XXX resumes. Just XXX more to your daily goal!</p>
+                <p>This week you have XXX job-search appointments/interviews.</p>
+                <hr />
+            </div>
+
+            <div class="dashboard-job-listings">
+                <table class="table-job-listings">
+                    <tr>
+                        <th>Company</th>
+                        <th>Job Title</th>
+                    </tr>
+<!--                    <tr th:if="${}">You don't have any active job applications. Let's get going!</tr>-->
+                </table>
+                <a href="/jobs/add">Add a job listing</a>
+<!--                <form action="add-job" method="POST">-->
+<!--                    <input type="text" placeholder="Company">-->
+<!--                    <input type="text" placeholder="Job Title">-->
+<!--                    <input type="submit" value="Add">-->
+<!--                </form>-->
+            </div>
+            <div class="dashboard-appointments"></div>
+        </div>
+    </main>
 
 </body>
 </html>
