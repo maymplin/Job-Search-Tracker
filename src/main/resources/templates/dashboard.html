@@ -36,5 +36,24 @@
         </div>
     </main>
 
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Job Title</th>
+            <th>Company Name</th>
+            <th>Job Description</th>
+            <th>User Name</th>
+        </tr>
+        </thead>
+        <tr th:each="job : ${jobListing}">
+            <td th:text="${job.id}"></td>
+            <td th:text="${job.jobTitle}"></a></td>
+            <td th:text="${job.company}"></td>
+            <td th:text="${job.jobListingDetails.jobDescription}"></td>
+            <td th:text="${job.user.username}"></td>
+        </tr>
+    </table>
+
 </body>
 </html>

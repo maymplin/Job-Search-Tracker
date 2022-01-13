@@ -30,14 +30,17 @@ public class JobController {
     private UserRepository userRepository;
 
     @GetMapping("add")
-    private String displayAddJobListingForm(Principal principal, Model model) {
+    private String displayAddJobListingForm(
+            Principal principal,
+            Model model) {
 //        System.out.println("JobController: Inside displayAddJobListingForm()");
         String username = principal.getName();
+        System.out.println("JobController: Inside displayAddJobListingForm() - username = "+username);
+//        User user = userRepository.findByUsername(username);
 
-        User user = userRepository.findByUsername(username);
         model.addAttribute("title", "Add a New Job Listing");
-        model.addAttribute("jobListing", new JobListing());
-        model.addAttribute("user", user);
+//        model.addAttribute("jobListing", new JobListing());
+        model.addAttribute("username", username);
 //        if (result.isEmpty()) {
 //            model.addAttribute("title", "Invalid user ID");
 //        } else {
@@ -68,16 +71,26 @@ public class JobController {
 //    }
 
     @PostMapping("add")
-    private String processAddJobListing(User user, String jobTitle, String company) {
+    private String processAddJobListing(
+            String username,
+//            User user,
+//                                        Principal principal,
+                                        String jobTitle, String company) {
         System.out.println("JobController: Inside processAddJobListing()");
-        JobListing newJobListing = new JobListing(jobTitle, company, user);
-        System.out.println(newJobListing);
-        jobListingRepository.save(newJobListing);
-        JobListingDetails newJobListingDetails = new JobListingDetails(newJobListing);
+
+//        String username = principal.getName();
+        User user = userRepository.findByUsername(username);
+
+        JobListingDetails newJobListingDetails = new JobListingDetails();
         joblistingDetailsRepository.save(newJobListingDetails);
 
-        return "../dashboard";
-    }
+        JobListing newJobListing = new JobListing(
+                jobTitle, company,
+                newJobListingDetails,
+                user);
+        System.out.println(newJobListing);
+        jobListingRepository.save(newJobListing);
 
 
-}
+        return "redirect:/dashboard";
+    }}

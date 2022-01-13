@@ -32,7 +32,10 @@ public class User extends AbstractEntity {
 
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "id"
+//            fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL
+    )
     private final List<JobListing> jobListings = new ArrayList<>();
 
     public User() {

@@ -9,11 +9,6 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 public class JobListingDetails extends AbstractEntity {
 
-    // https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    private JobListing jobListing;
-
 //    @NotEmpty
     private String jobListingUrl;
 
@@ -21,16 +16,26 @@ public class JobListingDetails extends AbstractEntity {
 
     private String jobDescription;
 
+    // https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
+    @OneToOne(//fetch = FetchType.LAZY,
+            mappedBy = "jobListingDetails")
+//    @MapsId
+    private JobListing jobListing;
+
     public JobListingDetails() {
     }
 
-    public JobListingDetails(JobListing jobListing) {
-        this(jobListing, "", "", "");
-    }
+//    public JobListingDetails(JobListing jobListing) {
+//
+//        this(jobListing, "", "", "");
+//    }
 
-    public JobListingDetails(JobListing jobListing, String jobListingUrl, String jobListingNumber,
+    public JobListingDetails(
+//            JobListing jobListing,
+                             String jobListingUrl,
+                             String jobListingNumber,
                              String jobDescription) {
-        this.jobListing = jobListing;
+//        this.jobListing = jobListing;
         this.jobListingUrl = jobListingUrl;
         this.jobListingNumber = jobListingNumber;
         this.jobDescription = jobDescription;

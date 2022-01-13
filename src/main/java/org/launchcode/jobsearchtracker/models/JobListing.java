@@ -1,7 +1,9 @@
 package org.launchcode.jobsearchtracker.models;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -15,24 +17,28 @@ public class JobListing extends AbstractEntity {
     @Size(min=2, max=50, message="Company must be between 2 and 50 characters")
     private String company;
 
-        private boolean jobListingStatus =  true;
+    private boolean jobListingStatus =  true;
 
     @ManyToOne
+//    @NotNull(message="User is required")
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL) //, fetch = FetchType.LAZY
+    @Valid
+    @NotNull
     private JobListingDetails jobListingDetails;
 
     public JobListing() {
     }
 
-    public JobListing(String jobTitle, String company, User user) {
+    public JobListing(String jobTitle, String company,
+                      JobListingDetails jobListingDetails, User user) {
         this.jobTitle = jobTitle;
-        if (jobListingDetails != null) {
-            jobListingDetails.setJobListing(this);
+//        if (jobListingDetails != null) {
+//            jobListingDetails.setJobListing(this);
             this.jobListingDetails = jobListingDetails;
-        }
-
+//        }
+        this.company = company;
         this.user = user;
     }
 
