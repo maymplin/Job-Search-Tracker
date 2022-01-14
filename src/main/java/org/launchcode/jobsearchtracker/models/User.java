@@ -32,10 +32,7 @@ public class User extends AbstractEntity {
 
     private boolean enabled;
 
-    @OneToMany(mappedBy = "id"
-//            fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL
-    )
+    @OneToMany(mappedBy = "user")
     private final List<JobListing> jobListings = new ArrayList<>();
 
     public User() {
@@ -96,4 +93,14 @@ public class User extends AbstractEntity {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public List<JobListing> getJobListings() {
+        return jobListings;
+    }
+
+    public void addJobListing(JobListing jobListing) {
+        this.jobListings.add(jobListing);
+    }
+
+
 }

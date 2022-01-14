@@ -16,10 +16,10 @@ public class WebController {
         return "login";
     }
 
-    @GetMapping("/dashboard")
-    public String displayDashboard() {
-        return "dashboard";
-    }
+//    @GetMapping("/dashboard")
+//    public String displayDashboard() {
+//        return "dashboard";
+//    }
 
 
 

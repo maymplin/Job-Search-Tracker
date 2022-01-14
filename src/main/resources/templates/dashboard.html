@@ -17,22 +17,17 @@
                 <hr />
             </div>
 
-            <div class="dashboard-job-listings">
-                <table class="table-job-listings">
-                    <tr>
-                        <th>Company</th>
-                        <th>Job Title</th>
-                    </tr>
-<!--                    <tr th:if="${}">You don't have any active job applications. Let's get going!</tr>-->
-                </table>
-                <a href="/jobs/add">Add a job listing</a>
-<!--                <form action="add-job" method="POST">-->
-<!--                    <input type="text" placeholder="Company">-->
-<!--                    <input type="text" placeholder="Job Title">-->
-<!--                    <input type="submit" value="Add">-->
-<!--                </form>-->
-            </div>
-            <div class="dashboard-appointments"></div>
+<!--            <div class="dashboard-job-listings">-->
+<!--                <table class="table-job-listings">-->
+<!--                    <tr>-->
+<!--                        <th>Company</th>-->
+<!--                        <th>Job Title</th>-->
+<!--                    </tr>-->
+<!--&lt;!&ndash;                    <tr th:if="${}">You don't have any active job applications. Let's get going!</tr>&ndash;&gt;-->
+<!--                </table>-->
+<!--                <a href="/jobs/add">Add a job listing</a>-->
+<!--            </div>-->
+<!--            <div class="dashboard-appointments"></div>-->
         </div>
     </main>
 
@@ -43,17 +38,18 @@
             <th>Job Title</th>
             <th>Company Name</th>
             <th>Job Description</th>
-            <th>User Name</th>
+<!--            <th>User Name</th>-->
         </tr>
         </thead>
-        <tr th:each="job : ${jobListing}">
+        <tr th:each="job : ${jobs}">
             <td th:text="${job.id}"></td>
             <td th:text="${job.jobTitle}"></a></td>
             <td th:text="${job.company}"></td>
             <td th:text="${job.jobListingDetails.jobDescription}"></td>
-            <td th:text="${job.user.username}"></td>
+<!--            <td th:text="${job.user.username}"></td>-->
         </tr>
     </table>
+    <a href="/jobs/add">Add a job listing</a>
 
 </body>
 </html>

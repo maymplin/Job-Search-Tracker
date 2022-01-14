@@ -7,14 +7,18 @@ import org.launchcode.jobsearchtracker.models.JobListing;
 import org.launchcode.jobsearchtracker.models.JobListingDetails;
 import org.launchcode.jobsearchtracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.oauth2.core.DefaultOAuth2AuthenticatedPrincipal;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Optional;
+import java.util.Map;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("jobs")
@@ -31,44 +35,26 @@ public class JobController {
 
     @GetMapping("add")
     private String displayAddJobListingForm(
+//            Authentication authentication,
             Principal principal,
             Model model) {
-//        System.out.println("JobController: Inside displayAddJobListingForm()");
+
         String username = principal.getName();
-        System.out.println("JobController: Inside displayAddJobListingForm() - username = "+username);
-//        User user = userRepository.findByUsername(username);
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        Object principal = auth.getPrincipal();
+
+
+//        SecurityContextImpl context = exchange.getSession()
+
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
 
         model.addAttribute("title", "Add a New Job Listing");
-//        model.addAttribute("jobListing", new JobListing());
         model.addAttribute("username", username);
-//        if (result.isEmpty()) {
-//            model.addAttribute("title", "Invalid user ID");
-//        } else {
-//            User user = result.get();
-//            model.addAttribute("title", "Add a New Job Listing");
-//            model.addAttribute("jobListing", new JobListing());
-//            model.addAttribute("user", user);
-//            }
+//        model.addAttribute("jobListing", new JobListing());
+
         return "jobs/add";
     }
-
-//    @PostMapping("add")
-//    private String processAddJobListingForm(String username,
-//            String jobTitle,
-//            String company,
-//            String listingUrl,
-//            String listingNumber,
-//            String jobDescription) {
-//
-//            User user = userRepository.findByUsername(username);
-//            JobListing newJobListing = new JobListing(jobTitle, company, user);
-//            jobListingRepository.save(newJobListing);
-//            JobListingDetails newJobListingDetails = new JobListingDetails(
-//            newJobListing, listingUrl, listingNumber, jobDescription);
-//            joblistingDetailsRepository.save(newJobListingDetails);
-//
-//            return "../dashboard";
-//    }
 
     @PostMapping("add")
     private String processAddJobListing(
@@ -76,7 +62,6 @@ public class JobController {
 //            User user,
 //                                        Principal principal,
                                         String jobTitle, String company) {
-        System.out.println("JobController: Inside processAddJobListing()");
 
 //        String username = principal.getName();
         User user = userRepository.findByUsername(username);
@@ -88,9 +73,11 @@ public class JobController {
                 jobTitle, company,
                 newJobListingDetails,
                 user);
-        System.out.println(newJobListing);
-        jobListingRepository.save(newJobListing);
 
+        jobListingRepository.save(newJobListing);
+        user.addJobListing(newJobListing);
 
         return "redirect:/dashboard";
-    }}
+    }
+
+}
