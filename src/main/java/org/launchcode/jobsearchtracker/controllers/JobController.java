@@ -7,18 +7,11 @@ import org.launchcode.jobsearchtracker.models.JobListing;
 import org.launchcode.jobsearchtracker.models.JobListingDetails;
 import org.launchcode.jobsearchtracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextImpl;
-import org.springframework.security.oauth2.core.DefaultOAuth2AuthenticatedPrincipal;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Map;
-import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("jobs")
@@ -65,19 +58,23 @@ public class JobController {
 
 //        String username = principal.getName();
         User user = userRepository.findByUsername(username);
+        System.out.println("user.getUsername() = "+ user.getUsername());
 
-        JobListingDetails newJobListingDetails = new JobListingDetails();
+        JobListingDetails newJobListingDetails = new JobListingDetails(company);
         joblistingDetailsRepository.save(newJobListingDetails);
+        System.out.println("newJobListingDetails.getCompany() = "+ newJobListingDetails.getCompany());
 
         JobListing newJobListing = new JobListing(
-                jobTitle, company,
+                jobTitle,
+//                company,
                 newJobListingDetails,
                 user);
-
+        System.out.println("newJobListing.getUser().getUsername() = "+ newJobListing.getUser().getUsername());
         jobListingRepository.save(newJobListing);
+        System.out.println("newJobListing.getJobTitle() = "+ newJobListing.getJobTitle());
         user.addJobListing(newJobListing);
 
-        return "redirect:/dashboard";
+        return "redirect:../dashboard";
     }
 
 }

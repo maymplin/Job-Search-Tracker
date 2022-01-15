@@ -5,10 +5,14 @@ import javax.persistence.FetchType;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 public class JobListingDetails extends AbstractEntity {
 
+    @NotEmpty
+    @Size(min=2, max=50, message="Company must be between 2 and 50 characters")
+    private String company;
 //    @NotEmpty
     private String jobListingUrl;
 
@@ -30,15 +34,30 @@ public class JobListingDetails extends AbstractEntity {
 //        this(jobListing, "", "", "");
 //    }
 
+
+    public JobListingDetails(String company) {
+        this.company = company;
+    }
+
     public JobListingDetails(
+            String company,
 //            JobListing jobListing,
                              String jobListingUrl,
                              String jobListingNumber,
                              String jobDescription) {
 //        this.jobListing = jobListing;
+        this.company = company;
         this.jobListingUrl = jobListingUrl;
         this.jobListingNumber = jobListingNumber;
         this.jobDescription = jobDescription;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public JobListing getJobListing() {

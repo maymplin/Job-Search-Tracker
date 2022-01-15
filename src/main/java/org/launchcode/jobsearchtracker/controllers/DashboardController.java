@@ -5,17 +5,14 @@ import org.launchcode.jobsearchtracker.data.JobListingRepository;
 import org.launchcode.jobsearchtracker.data.UserRepository;
 import org.launchcode.jobsearchtracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
 @Controller
-@RequestMapping("dashboard")
+//@RequestMapping("dashboard")
 public class DashboardController {
 
     @Autowired
@@ -28,7 +25,7 @@ public class DashboardController {
     private JobListingDetailsRepository jobListingDetailsRepository;
 
 
-    @GetMapping
+    @GetMapping("dashboard")
     public String displayAllJobs (Principal principal, Model model) {
 
 //        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

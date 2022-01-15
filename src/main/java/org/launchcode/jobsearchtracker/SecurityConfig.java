@@ -100,7 +100,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                             CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
 
-                            userService.processOAuthPostLogin(oAuth2User.getEmail());
+//                            userService.processOAuthPostLogin(oAuth2User.getEmail()); // getName
+                            userService.processOAuthPostLogin(oAuth2User.getName(), oAuth2User.getEmail());
 
                             response.sendRedirect("/dashboard");
                         }

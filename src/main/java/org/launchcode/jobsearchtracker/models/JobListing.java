@@ -13,14 +13,14 @@ public class JobListing extends AbstractEntity {
     @Size(min=2, max=50, message="Job title must be between 2 and 50 characters")
     private String jobTitle;
 
-    @NotEmpty
-    @Size(min=2, max=50, message="Company must be between 2 and 50 characters")
-    private String company;
+//    @NotEmpty
+//    @Size(min=2, max=50, message="Company must be between 2 and 50 characters")
+//    private String company;
 
     private boolean jobListingStatus =  true;
 
     @ManyToOne
-//    @NotNull(message="User is required")
+    @NotNull(message="User is required")
     private User user;
 
     @OneToOne(cascade = CascadeType.ALL) //, fetch = FetchType.LAZY
@@ -31,14 +31,16 @@ public class JobListing extends AbstractEntity {
     public JobListing() {
     }
 
-    public JobListing(String jobTitle, String company,
-                      JobListingDetails jobListingDetails, User user) {
+    public JobListing(String jobTitle,
+//                      String company,
+                      JobListingDetails jobListingDetails,
+                      User user) {
         this.jobTitle = jobTitle;
 //        if (jobListingDetails != null) {
 //            jobListingDetails.setJobListing(this);
             this.jobListingDetails = jobListingDetails;
 //        }
-        this.company = company;
+//        this.company = company;
         this.user = user;
     }
 
@@ -59,13 +61,13 @@ public class JobListing extends AbstractEntity {
         this.jobTitle = jobTitle;
     }
 
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
+//    public String getCompany() {
+//        return company;
+//    }
+//
+//    public void setCompany(String company) {
+//        this.company = company;
+//    }
 
     public boolean isJobListingStatus() {
         return jobListingStatus;
