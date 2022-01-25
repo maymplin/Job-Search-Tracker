@@ -3,13 +3,16 @@ package org.launchcode.jobsearchtracker.controllers;
 import org.launchcode.jobsearchtracker.data.JobListingDetailsRepository;
 import org.launchcode.jobsearchtracker.data.JobListingRepository;
 import org.launchcode.jobsearchtracker.data.UserRepository;
+import org.launchcode.jobsearchtracker.models.JobListing;
+import org.launchcode.jobsearchtracker.models.JobListingDetails;
 import org.launchcode.jobsearchtracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 //@RequestMapping("dashboard")
@@ -26,22 +29,38 @@ public class DashboardController {
 
 
     @GetMapping("dashboard")
+//    @GetMapping
     public String displayAllJobs (Principal principal, Model model) {
-
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         String username = principal.getName();
 
-//        String username;
-//        if (principal instanceof UserDetails) {
-//            username = ((UserDetails) principal).getUsername();
-//        } else {
-//            username = principal.toString();
-//        }
-
         User user = userRepository.findByUsername(username);
 
-        model.addAttribute("jobs", user.getJobListings());
+        if (user.getJobListings() != null) {
+            model.addAttribute("jobs", user.getJobListings());
+        }
+
         return "/dashboard";
+    }
+
+    @GetMapping("/{id}")
+    public String displayJobListing(@PathVariable String id, Model model) {
+        int jobListingId = Integer.parseInt(id);
+
+        Optional<JobListing> result = jobListingRepository.findById(jobListingId);
+
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Job Listing ID: " + jobListingId);
+        } else {
+            JobListing jobListing = result.get();
+            JobListingDetails jobListingDetails = jobListing.getJobListingDetails();
+            model.addAttribute("title", jobListingDetails.getCompany() + ": "
+                    + jobListing.getJobTitle());
+            model.addAttribute("listing", jobListing);
+            model.addAttribute("details", jobListingDetails);
+        }
+
+
+        return "jobs/jobListing";
     }
 }

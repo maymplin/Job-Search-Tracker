@@ -37,7 +37,8 @@
             <th>ID</th>
             <th>Job Title</th>
             <th>Company Name</th>
-            <th>Job Description</th>
+<!--            <th>Job Description</th>-->
+            <th></th>
 <!--            <th>User Name</th>-->
         </tr>
         </thead>
@@ -45,7 +46,8 @@
             <td th:text="${job.id}"></td>
             <td th:text="${job.jobTitle}"></a></td>
             <td th:text="${job.jobListingDetails.company}"></td>
-            <td th:text="${job.jobListingDetails.jobDescription}"></td>
+<!--            <td th:text="${job.jobListingDetails.jobDescription}"></td>-->
+            <td> <a th:href="@{../{id}(id=${job.id})}">See/Edit</a></td>
 <!--            <td th:text="${job.user.username}"></td>-->
         </tr>
     </table>

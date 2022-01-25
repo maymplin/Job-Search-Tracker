@@ -18,6 +18,14 @@ public class JobListingDetails extends AbstractEntity {
 
     private String jobListingNumber;
 
+    private String jobLocation;
+
+    private String jobType;
+
+    private String jobSalary;
+
+    private String jobQualifications;
+
     private String jobDescription;
 
     // https://vladmihalcea.com/the-best-way-to-map-a-onetoone-relationship-with-jpa-and-hibernate/
@@ -82,6 +90,38 @@ public class JobListingDetails extends AbstractEntity {
 
     public void setJobListingNumber(String jobListingNumber) {
         this.jobListingNumber = jobListingNumber;
+    }
+
+    public String getJobLocation() {
+        return jobLocation;
+    }
+
+    public void setJobLocation(String jobLocation) {
+        this.jobLocation = jobLocation;
+    }
+
+    public String getJobType() {
+        return jobType;
+    }
+
+    public void setJobType(String jobType) {
+        this.jobType = jobType;
+    }
+
+    public String getJobSalary() {
+        return jobSalary;
+    }
+
+    public void setJobSalary(String jobSalary) {
+        this.jobSalary = jobSalary;
+    }
+
+    public String getJobQualifications() {
+        return jobQualifications;
+    }
+
+    public void setJobQualifications(String jobQualifications) {
+        this.jobQualifications = jobQualifications;
     }
 
     public String getJobDescription() {

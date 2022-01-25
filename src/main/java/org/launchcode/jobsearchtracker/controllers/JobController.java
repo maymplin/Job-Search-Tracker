@@ -28,50 +28,35 @@ public class JobController {
 
     @GetMapping("add")
     private String displayAddJobListingForm(
-//            Authentication authentication,
             Principal principal,
             Model model) {
 
         String username = principal.getName();
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        Object principal = auth.getPrincipal();
-
-
-//        SecurityContextImpl context = exchange.getSession()
-
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 
         model.addAttribute("title", "Add a New Job Listing");
         model.addAttribute("username", username);
-//        model.addAttribute("jobListing", new JobListing());
 
         return "jobs/add";
     }
 
     @PostMapping("add")
     private String processAddJobListing(
-            String username,
-//            User user,
-//                                        Principal principal,
-                                        String jobTitle, String company) {
+            String username, String jobTitle, String company) {
 
-//        String username = principal.getName();
         User user = userRepository.findByUsername(username);
-        System.out.println("user.getUsername() = "+ user.getUsername());
+//        System.out.println("user.getUsername() = "+ user.getUsername());
 
         JobListingDetails newJobListingDetails = new JobListingDetails(company);
         joblistingDetailsRepository.save(newJobListingDetails);
-        System.out.println("newJobListingDetails.getCompany() = "+ newJobListingDetails.getCompany());
+//        System.out.println("newJobListingDetails.getCompany() = "+ newJobListingDetails.getCompany());
 
         JobListing newJobListing = new JobListing(
                 jobTitle,
-//                company,
                 newJobListingDetails,
                 user);
-        System.out.println("newJobListing.getUser().getUsername() = "+ newJobListing.getUser().getUsername());
+//        System.out.println("newJobListing.getUser().getUsername() = "+ newJobListing.getUser().getUsername());
         jobListingRepository.save(newJobListing);
-        System.out.println("newJobListing.getJobTitle() = "+ newJobListing.getJobTitle());
+//        System.out.println("newJobListing.getJobTitle() = "+ newJobListing.getJobTitle());
         user.addJobListing(newJobListing);
 
         return "redirect:../dashboard";
