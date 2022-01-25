@@ -27,7 +27,7 @@ public class JobController {
     private UserRepository userRepository;
 
     @GetMapping("add")
-    private String displayAddJobListingForm(
+    public String displayAddJobListingForm(
             Principal principal,
             Model model) {
 
@@ -40,13 +40,17 @@ public class JobController {
     }
 
     @PostMapping("add")
-    private String processAddJobListing(
-            String username, String jobTitle, String company) {
+    public String processAddJobListing(
+            String username, String jobTitle, String company, String jobListingUrl,
+            String jobListingNumber, String jobDescription) {
 
         User user = userRepository.findByUsername(username);
 //        System.out.println("user.getUsername() = "+ user.getUsername());
 
-        JobListingDetails newJobListingDetails = new JobListingDetails(company);
+//        JobListingDetails newJobListingDetails = new JobListingDetails(company);
+
+        JobListingDetails newJobListingDetails =
+                new JobListingDetails(company, jobListingUrl, jobListingNumber, jobDescription);
         joblistingDetailsRepository.save(newJobListingDetails);
 //        System.out.println("newJobListingDetails.getCompany() = "+ newJobListingDetails.getCompany());
 
@@ -60,6 +64,15 @@ public class JobController {
         user.addJobListing(newJobListing);
 
         return "redirect:../dashboard";
+    }
+
+    public String displayEditJobListingForm(Principal principal, Model model) {
+        String username = principal.getName();
+
+        model.addAttribute("title", "Add a New Job Listing");
+        model.addAttribute("username", username);
+
+        return "jobs/add";
     }
 
 }

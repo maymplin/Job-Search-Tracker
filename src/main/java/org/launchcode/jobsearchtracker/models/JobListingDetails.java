@@ -43,6 +43,8 @@ public class JobListingDetails extends AbstractEntity {
 //    }
 
 
+
+
     public JobListingDetails(String company) {
         this.company = company;
     }
@@ -55,9 +57,24 @@ public class JobListingDetails extends AbstractEntity {
                              String jobDescription) {
 //        this.jobListing = jobListing;
         this.company = company;
-        this.jobListingUrl = jobListingUrl;
-        this.jobListingNumber = jobListingNumber;
-        this.jobDescription = jobDescription;
+
+        if (jobListingUrl == null) {
+            this.jobListingUrl = "";
+        } else {
+            this.jobListingUrl = jobListingUrl;
+        }
+
+        if (jobListingNumber == null) {
+            this.jobListingNumber = "";
+        } else {
+            this.jobListingNumber = jobListingNumber;
+        }
+
+        if (jobDescription == null) {
+            this.jobDescription = "";
+        } else {
+            this.jobDescription = jobDescription;
+        }
     }
 
     public String getCompany() {
