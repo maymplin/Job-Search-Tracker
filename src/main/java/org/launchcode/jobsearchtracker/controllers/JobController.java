@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("jobs")
@@ -77,13 +78,35 @@ public class JobController {
         return "redirect:../dashboard";
     }
 
-    public String displayEditJobListingForm(Principal principal, Model model) {
-        String username = principal.getName();
+    @GetMapping("{id}")
+    public String displayJobListing(@PathVariable String id, Model model) {
+        int jobListingId = Integer.parseInt(id);
 
-        model.addAttribute("title", "Add a New Job Listing");
-        model.addAttribute("username", username);
+        Optional<JobListing> result = jobListingRepository.findById(jobListingId);
 
-        return "jobs/add";
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Job Listing ID: " + jobListingId);
+        } else {
+            JobListing jobListing = result.get();
+            JobListingDetails jobListingDetails = jobListing.getJobListingDetails();
+            model.addAttribute("title", jobListingDetails.getCompany() + ": "
+                    + jobListing.getJobTitle());
+            model.addAttribute("listing", jobListing);
+            model.addAttribute("details", jobListingDetails);
+        }
+
+
+        return "jobs/jobListing";
     }
+
+//    @RequestMapping("edit")
+//    public String displayEditJobListingForm(Principal principal, Model model) {
+//        String username = principal.getName();
+//
+////        model.addAttribute("title", "Edit a New Job Listing");
+//        model.addAttribute("username", username);
+//
+//        return "jobs/add";
+//    }
 
 }

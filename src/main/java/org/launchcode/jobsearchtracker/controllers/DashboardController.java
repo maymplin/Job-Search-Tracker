@@ -43,24 +43,5 @@ public class DashboardController {
         return "/dashboard";
     }
 
-    @GetMapping("/{id}")
-    public String displayJobListing(@PathVariable String id, Model model) {
-        int jobListingId = Integer.parseInt(id);
 
-        Optional<JobListing> result = jobListingRepository.findById(jobListingId);
-
-        if (result.isEmpty()) {
-            model.addAttribute("title", "Invalid Job Listing ID: " + jobListingId);
-        } else {
-            JobListing jobListing = result.get();
-            JobListingDetails jobListingDetails = jobListing.getJobListingDetails();
-            model.addAttribute("title", jobListingDetails.getCompany() + ": "
-                    + jobListing.getJobTitle());
-            model.addAttribute("listing", jobListing);
-            model.addAttribute("details", jobListingDetails);
-        }
-
-
-        return "jobs/jobListing";
-    }
 }
