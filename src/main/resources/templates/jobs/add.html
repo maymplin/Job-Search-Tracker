@@ -7,7 +7,7 @@
     <nav th:replace="fragments :: navigation"></nav>
 
     <main>
-        <h4 th:text="${title}">Testing</h4>
+        <h4 th:text="${title}">add.html</h4>
         <form th:action="@{/jobs/add}" method="POST">
             <div class="form-group">
                 <label>Job Title
@@ -27,6 +27,27 @@
             <div class="form-group">
                 <label>Job Listing Number
                     <input type="text" th:name="jobListingNumber" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Location
+                    <input type="text" th:name="jobLocation" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Job Type
+                    <input type="text" th:name="jobType" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Salary
+                    <input type="text" th:name="salary" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Qualifications
+                    <textarea th:name="jobQualifications" rows="4" cols="50">
+                    </textarea>
                 </label>
             </div>
             <div class="form-group">

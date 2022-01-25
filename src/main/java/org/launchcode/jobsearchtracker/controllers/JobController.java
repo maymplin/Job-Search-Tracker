@@ -41,8 +41,17 @@ public class JobController {
 
     @PostMapping("add")
     public String processAddJobListing(
-            String username, String jobTitle, String company, String jobListingUrl,
-            String jobListingNumber, String jobDescription) {
+            String username,
+            String jobTitle,
+            String company,
+            String jobListingUrl,
+            String jobListingNumber,
+            String jobLocation,
+            String jobType,
+            String salary,
+            String jobQualifications,
+            String jobDescription
+            ) {
 
         User user = userRepository.findByUsername(username);
 //        System.out.println("user.getUsername() = "+ user.getUsername());
@@ -50,7 +59,9 @@ public class JobController {
 //        JobListingDetails newJobListingDetails = new JobListingDetails(company);
 
         JobListingDetails newJobListingDetails =
-                new JobListingDetails(company, jobListingUrl, jobListingNumber, jobDescription);
+                new JobListingDetails(company, jobListingUrl, jobListingNumber,
+                        jobLocation, jobType, salary, jobQualifications,
+                        jobDescription);
         joblistingDetailsRepository.save(newJobListingDetails);
 //        System.out.println("newJobListingDetails.getCompany() = "+ newJobListingDetails.getCompany());
 
