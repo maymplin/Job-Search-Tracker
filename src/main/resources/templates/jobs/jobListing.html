@@ -20,7 +20,7 @@
         <p><b>Description: </b><p th:text="${details.jobDescription}"></p></p><br />
     </div>
     <div>
-        <a href="/jobs/add">Edit Job Details</a>
+        <a th:href="@{edit/{id}(id=${id})}">Edit Job Details</a>
     </div>
 </body>
 </html>

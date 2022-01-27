@@ -8,6 +8,7 @@ import org.launchcode.jobsearchtracker.models.JobListingDetails;
 import org.launchcode.jobsearchtracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -93,20 +94,90 @@ public class JobController {
                     + jobListing.getJobTitle());
             model.addAttribute("listing", jobListing);
             model.addAttribute("details", jobListingDetails);
+            model.addAttribute("id", jobListingId);
         }
 
 
         return "jobs/jobListing";
     }
 
-//    @RequestMapping("edit")
-//    public String displayEditJobListingForm(Principal principal, Model model) {
-//        String username = principal.getName();
-//
-////        model.addAttribute("title", "Edit a New Job Listing");
-//        model.addAttribute("username", username);
-//
-//        return "jobs/add";
-//    }
+    @GetMapping("edit/{id}")
+    public String displayEditJobListingForm(Principal principal, Model model,
+                                            @PathVariable String id) {
+        int jobListingId = Integer.parseInt(id);
+        String username = principal.getName();
 
+        Optional<JobListing> result = jobListingRepository.findById(jobListingId);
+
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Job Listing");
+        } else {
+            JobListing jobListing = result.get();
+            model.addAttribute("jobListing", jobListing);
+        }
+
+//        model.addAttribute("title", "Edit a New Job Listing");
+//        model.addAttribute("jobTitle")
+
+        return "jobs/edit";
+    }
+
+    @PostMapping("edit/{id}")
+    public String processEditJobListing(@PathVariable String id, Model model,
+                                        String username,
+                                        String jobTitle,
+                                        String company,
+                                        String jobListingUrl,
+                                        String jobListingNumber,
+                                        String jobLocation,
+                                        String jobType,
+                                        String salary,
+                                        String jobQualifications,
+                                        String jobDescription) {
+
+        System.out.println("***************JobController: inside processEditJobListing() method***************");
+        Integer jobListingId = Integer.parseInt(id);
+
+        Optional<JobListing> result = jobListingRepository.findById(jobListingId);
+
+        if (result.isEmpty()) {
+            model.addAttribute("Title",
+                    "Job editing unsuccessful. Please try again.");
+        } else {
+            JobListing jobListing = result.get();
+            jobListing.setJobTitle(jobTitle);
+            jobListingRepository.save(jobListing);
+
+            JobListingDetails listingDetails = jobListing.getJobListingDetails();
+            int jobListingDetailsId = listingDetails.getId();
+            Optional<JobListingDetails> resultDetails =
+                    joblistingDetailsRepository.findById(jobListingDetailsId);
+            System.out.println("******Job Details ID: " + jobListingDetailsId + "******");
+            System.out.println("******resultDetails " + resultDetails + "******");
+
+            if (resultDetails.isEmpty()) {
+                model.addAttribute("Title",
+                        "Job editing unsuccessful. Please try again.");
+            } else {
+                System.out.println("******Inside else******");
+                JobListingDetails jobListingDetails = resultDetails.get();
+                jobListingDetails.setCompany(company);
+////                jobListingDetails.editJobListingDetails(
+////                        company,
+////                        jobListingUrl,
+////                        jobListingNumber,
+////                        jobLocation,
+////                        jobType,
+////                        salary,
+////                        jobQualifications,
+////                        jobDescription);
+//
+                joblistingDetailsRepository.save(jobListingDetails);
+//
+            }
+
+        }
+
+        return "redirect:/dashboard";
+    }
 }

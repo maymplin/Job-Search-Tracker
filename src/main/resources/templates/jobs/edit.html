@@ -7,31 +7,53 @@
     <nav th:replace="fragments :: navigation"></nav>
 
     <main>
-        <h4 th:text="${title}">Testing</h4>
-        <form th:action="@{/jobs/add}" method="POST">
+        <h4 th:text="${title}">add.html</h4>
+        <form th:action="@{/jobs/edit/{id}(id=${id})}" th:object="${jobListing}" method="POST">
             <div class="form-group">
                 <label>Job Title
-                    <input type="text" th:name="jobTitle" />
+                    <input type="text" th:name="jobTitle" th:field="*{jobTitle}" />
                 </label>
             </div>
             <div class="form-group">
                 <label>Company
-                    <input type="text" th:name="company" />
+                    <input type="text" th:name="company" th:field="*{jobListingDetails.company}"/>
                 </label>
             </div>
             <div class="form-group">
                 <label>Job Listing URL
-                    <input type="url" th:name="jobListingUrl" />
+                    <input type="url" th:name="jobListingUrl" th:field="*{jobListingDetails.jobListingUrl}"/>
                 </label>
             </div>
             <div class="form-group">
                 <label>Job Listing Number
-                    <input type="text" th:name="jobListingNumber" />
+                    <input type="text" th:name="jobListingNumber" th:field="*{jobListingDetails.jobListingNumber}" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Location
+                    <input type="text" th:name="jobLocation" th:field="*{jobListingDetails.jobLocation}" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Job Type
+                    <input type="text" th:name="jobType" th:field="*{jobListingDetails.jobType}" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Salary
+                    <input type="text" th:name="salary" th:field="*{jobListingDetails.jobSalary}"/>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Qualifications
+                    <textarea th:name="jobQualifications" th:filed="*{jobListingDetails.jobQualifications}" rows="4"
+                              cols="50">
+                    </textarea>
                 </label>
             </div>
             <div class="form-group">
                 <label>Description
-                    <textarea th:name="jobDescription" rows="4" cols="50">
+                    <textarea th:name="jobDescription" th:field="*{jobListingDetails.jobDescription}" rows="4" cols="50">
                     </textarea>
                 </label>
             </div>
@@ -42,7 +64,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Add Job Listing" class="btn btn btn-success"/>
+                <input type="submit" value="Save Job Listing" class="btn btn btn-success"/>
             </div>
         </form>
     </main>

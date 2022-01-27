@@ -105,6 +105,20 @@ public class JobListingDetails extends AbstractEntity {
         }
     }
 
+    public void editJobListingDetails(String company, String jobListingUrl,
+                                     String jobListingNumber, String jobLocation,
+                                     String jobType, String jobSalary,
+                                     String jobQualifications, String jobDescription) {
+        setCompany(company);
+        setJobListingUrl(jobListingUrl);
+        setJobListingNumber(jobListingNumber);
+        setJobLocation(jobLocation);
+        setJobType(jobType);
+        setJobSalary(jobSalary);
+        setJobQualifications(jobQualifications);
+        setJobDescription(jobDescription);
+    }
+
     public String getCompany() {
         return company;
     }
