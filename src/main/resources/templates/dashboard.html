@@ -3,11 +3,56 @@
 <head th:replace="fragments :: head"></head>
 <body>
     <header th:replace="fragments :: header"></header>
-    <form th:action="@{/logout}" method="POST">
-        <input type="submit" value="Logout" />
-    </form>
-    <h1>Secured Page</h1>
-    <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+    <nav th:replace="fragments :: navigation"></nav>
+<!--    <form th:action="@{/logout}" method="POST">-->
+<!--        <input type="submit" value="Logout" />-->
+<!--    </form>-->
+    <main>
+        <div class="dashboard-container">
+            <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+            <br />
+            <div class="dashboard-goals">
+                <p>Today you sent XXX resumes. Just XXX more to your daily goal!</p>
+                <p>This week you have XXX job-search appointments/interviews.</p>
+                <hr />
+            </div>
+
+<!--            <div class="dashboard-job-listings">-->
+<!--                <table class="table-job-listings">-->
+<!--                    <tr>-->
+<!--                        <th>Company</th>-->
+<!--                        <th>Job Title</th>-->
+<!--                    </tr>-->
+<!--&lt;!&ndash;                    <tr th:if="${}">You don't have any active job applications. Let's get going!</tr>&ndash;&gt;-->
+<!--                </table>-->
+<!--                <a href="/jobs/add">Add a job listing</a>-->
+<!--            </div>-->
+<!--            <div class="dashboard-appointments"></div>-->
+        </div>
+    </main>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Job Title</th>
+            <th>Company Name</th>
+<!--            <th>Job Description</th>-->
+            <th></th>
+<!--            <th>User Name</th>-->
+        </tr>
+        </thead>
+        <tr th:each="job : ${jobs}">
+            <td th:text="${job.id}"></td>
+            <td th:text="${job.jobTitle}"></a></td>
+            <td th:text="${job.jobListingDetails.company}"></td>
+<!--            <td th:text="${job.jobListingDetails.jobDescription}"></td>-->
+            <td> <a th:href="@{jobs/{id}(id=${job.id})}">See</a> /
+                <a th:href="@{jobs/edit/{id}(id=${job.id})}">Edit</a></td>
+<!--            <td th:text="${job.user.username}"></td>-->
+        </tr>
+    </table>
+    <a href="/jobs/add">Add a job listing</a>
 
 </body>
 </html>

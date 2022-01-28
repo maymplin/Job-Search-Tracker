@@ -6,8 +6,19 @@
     <title>Job Search Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{styles.css}" type="text/css">
+<!--    <link rel="stylesheet" th:href="@{styles.css}" type="text/css">-->
+    <link rel="stylesheet" th:href="@{css/styles.css}">
 </head>
+
+<head th:fragment="head-jobs">
+    <meta charset="UTF-8" />
+    <title>Job Search Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" th:href="@{styles.css}" type="text/css">-->
+    <link rel="stylesheet" th:href="@{../css/styles.css}">
+</head>
+
 <body>
 <header th:fragment="header">
     <div class="header-container">
@@ -18,13 +29,24 @@
             <p>Job Search Tracker</p>
         </div>
         <div class="header-column-side">
-            <p>Logout</p>
+            <form th:action="@{/logout}" method="POST">
+                <input type="submit" value="Logout" />
+            </form>
+<!--            <p>Logout</p>-->
         </div>
     </div>
-    <nav>
-
-    </nav>
 </header>
+<nav th:fragment="navigation">
+    <div class="nav-container">
+        <div class="nav-column-left">
+            <a th:href="@{/dashboard}">Dashboard</a>
+        </div>
+        <div class="nav-column-right">
+            <a href="">List My Jobs</a>
+            <a href="">Search My Jobs</a>
+        </div>
+    </div>
+</nav>
 
 </body>
 </html>

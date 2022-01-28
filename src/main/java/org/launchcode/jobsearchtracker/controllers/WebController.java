@@ -11,15 +11,20 @@ import java.security.Principal;
 @Controller
 public class WebController {
 
+    @GetMapping
+    public String displayRoot() {
+        return "redirect:/dashboard";
+    }
+
     @GetMapping("/login")
     public String displayLoginPage() {
         return "login";
     }
 
-    @GetMapping("/dashboard")
-    public String displayDashboard() {
-        return "dashboard";
-    }
+//    @GetMapping("/dashboard")
+//    public String displayDashboard() {
+//        return "dashboard";
+//    }
 
 
 

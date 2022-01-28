@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head-jobs">
+</head>
+<body>
+    <header th:replace="fragments :: header"></header>
+    <nav th:replace="fragments :: navigation"></nav>
+    <h3 class="title" th:text="${title}"></h3>
+
+    <hr />
+
+    <div class="job-block">
+        <p><b>Listing URL: </b></p><a th:href="${details.jobListingUrl}">original job posting</a><br />
+        <th:block th:if="${details.jobListingNumber}"><p><b></b></p><br /></th:block>
+        <p><b>Location: </b><p th:text="${details.jobLocation}"></p><br />
+        <p><b>Job Type: </b><p th:text="${details.jobType}"></p></p><br />
+        <p><b>Salary: </b><p th:text="${details.jobSalary}"></p></p><br />
+        <p><b>Qualifications: </b></p><br />
+        <p th:text="${details.jobQualifications}"></p>
+        <p><b>Description: </b><p th:text="${details.jobDescription}"></p></p><br />
+    </div>
+    <button class="btn">
+        <a th:href="@{edit/{id}(id=${id})}">Edit Job Details</a>
+    </button>
+    <button class="btn">
+        <form th:action="@{/jobs/{id}(id=${id})}" method="post">
+            <input type="submit" value="Delete Job">
+        </form>
+    </button>
+</body>
+</html>
