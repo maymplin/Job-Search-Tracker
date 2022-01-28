@@ -1,5 +1,7 @@
 package org.launchcode.jobsearchtracker.controllers;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.launchcode.jobsearchtracker.data.JobListingDetailsRepository;
 import org.launchcode.jobsearchtracker.data.JobListingRepository;
 import org.launchcode.jobsearchtracker.data.UserRepository;
@@ -8,7 +10,6 @@ import org.launchcode.jobsearchtracker.models.JobListingDetails;
 import org.launchcode.jobsearchtracker.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,9 @@ public class JobController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @GetMapping("add")
     public String displayAddJobListingForm(
@@ -137,6 +141,14 @@ public class JobController {
 
         System.out.println("***************JobController: inside processEditJobListing() method***************");
         Integer jobListingId = Integer.parseInt(id);
+
+
+//        // get the current hibernate session
+//        Session currentSession = sessionFactory.getCurrentSession();
+//
+//        // retrieve/read from database using the primary key
+//        JobListing theJobListing = currentSession.get(JobListing.class, jobListingId);
+
 
         Optional<JobListing> result = jobListingRepository.findById(jobListingId);
 
