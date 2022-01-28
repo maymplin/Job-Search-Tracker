@@ -22,7 +22,7 @@ public class JobController {
     private JobListingRepository jobListingRepository;
 
     @Autowired
-    private JobListingDetailsRepository joblistingDetailsRepository;
+    private JobListingDetailsRepository jobListingDetailsRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -63,7 +63,7 @@ public class JobController {
                 new JobListingDetails(company, jobListingUrl, jobListingNumber,
                         jobLocation, jobType, salary, jobQualifications,
                         jobDescription);
-        joblistingDetailsRepository.save(newJobListingDetails);
+        jobListingDetailsRepository.save(newJobListingDetails);
 //        System.out.println("newJobListingDetails.getCompany() = "+ newJobListingDetails.getCompany());
 
         JobListing newJobListing = new JobListing(
@@ -93,20 +93,106 @@ public class JobController {
                     + jobListing.getJobTitle());
             model.addAttribute("listing", jobListing);
             model.addAttribute("details", jobListingDetails);
+            model.addAttribute("id", jobListingId);
         }
 
 
         return "jobs/jobListing";
     }
 
-//    @RequestMapping("edit")
-//    public String displayEditJobListingForm(Principal principal, Model model) {
-//        String username = principal.getName();
-//
-////        model.addAttribute("title", "Edit a New Job Listing");
-//        model.addAttribute("username", username);
-//
-//        return "jobs/add";
-//    }
+    @GetMapping("edit/{id}")
+    public String displayEditJobListingForm(Principal principal, Model model,
+                                            @PathVariable String id) {
+        int jobListingId = Integer.parseInt(id);
+        String username = principal.getName();
 
+        Optional<JobListing> result = jobListingRepository.findById(jobListingId);
+
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Invalid Job Listing");
+        } else {
+            JobListing jobListing = result.get();
+            model.addAttribute("title", "Edit Job Listing");
+            model.addAttribute("jobListing", jobListing);
+        }
+
+        return "jobs/edit";
+    }
+
+    @PostMapping("edit/{id}")
+    public String processEditJobListing(@PathVariable String id, Model model,
+                                        String username,
+                                        String jobTitle,
+                                        String company,
+                                        String jobListingUrl,
+                                        String jobListingNumber,
+                                        String jobLocation,
+                                        String jobType,
+                                        String salary,
+                                        String jobQualifications,
+                                        String jobDescription) {
+
+        Integer jobListingId = Integer.parseInt(id);
+
+        Optional<JobListing> result = jobListingRepository.findById(jobListingId);
+
+        if (result.isEmpty()) {
+            model.addAttribute("Title",
+                    "Job editing unsuccessful. Please try again.");
+        } else {
+            JobListing jobListing = result.get();
+            jobListing.setJobTitle(jobTitle);
+            jobListingRepository.save(jobListing);
+
+            JobListingDetails listingDetails = jobListing.getJobListingDetails();
+            int jobListingDetailsId = listingDetails.getId();
+            Optional<JobListingDetails> resultDetails =
+                    jobListingDetailsRepository.findById(jobListingDetailsId);
+
+            if (resultDetails.isEmpty()) {
+                model.addAttribute("Title",
+                        "Job editing unsuccessful. Please try again.");
+            } else {
+                JobListingDetails jobListingDetails = resultDetails.get();
+                jobListingDetails.editJobListingDetails(
+                        company,
+                        jobListingUrl,
+                        jobListingNumber,
+                        jobLocation,
+                        jobType,
+                        salary,
+                        jobQualifications,
+                        jobDescription);
+
+                jobListingDetailsRepository.save(jobListingDetails);
+            }
+
+        }
+
+        return "redirect:/dashboard";
+    }
+
+    @PostMapping("{id}")
+    public String deleteJobListing(@PathVariable String id, Model model, Principal principal) {
+
+        User user = userRepository.findByUsername(principal.getName());
+
+        int jobListingId = Integer.parseInt(id);
+
+        Optional<JobListing> result = jobListingRepository.findById(jobListingId);
+
+        if (result.isEmpty()) {
+            model.addAttribute("title", "Job listing deletion unsuccessful");
+        } else {
+            JobListing jobListing = result.get();
+
+            JobListingDetails jobListingDetails = jobListing.getJobListingDetails();
+
+            user.deleteJobListing(jobListing);
+
+            jobListingRepository.deleteById(jobListingId);
+        }
+
+        return "redirect:/dashboard";
+    }
 }

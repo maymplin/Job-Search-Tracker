@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/login", "/oauth2/**").permitAll()
+                    .antMatchers("/", "/login", "/oauth2/**", "/css/**", "/js/**").permitAll()
                     // allows anyone to access a URL that begins with "/resources"
                     // since this is where my CSS, JavaScript and images are stored
                     // all my static resources are viewable by anyone
@@ -110,27 +110,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().permitAll()
                 .logoutSuccessUrl("/login")
                 .and()
+//                .rememberMe()
+//                .and()
                 .exceptionHandling().accessDeniedPage("/403");
     }
-
-
-    //    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web
-//                .ignoring()
-//                .antMatchers("../static/**");
-//    }
-
-//    // okta tutorial
-//    @Override
-//    protected void configure(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity
-//                .csrf().disable()
-//                .antMatcher("/**")
-//                .authorizeRequests()
-//                .antMatchers("/", "/login.html","/login**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .oauth2Login();
-//    }
 }

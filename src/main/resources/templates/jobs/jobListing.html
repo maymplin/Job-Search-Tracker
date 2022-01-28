@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
+<head th:replace="fragments :: head-jobs">
 </head>
 <body>
     <header th:replace="fragments :: header"></header>
@@ -19,8 +19,13 @@
         <p th:text="${details.jobQualifications}"></p>
         <p><b>Description: </b><p th:text="${details.jobDescription}"></p></p><br />
     </div>
-    <div>
-        <a href="/jobs/add">Edit Job Details</a>
-    </div>
+    <button class="btn">
+        <a th:href="@{edit/{id}(id=${id})}">Edit Job Details</a>
+    </button>
+    <button class="btn">
+        <form th:action="@{/jobs/{id}(id=${id})}" method="post">
+            <input type="submit" value="Delete Job">
+        </form>
+    </button>
 </body>
 </html>

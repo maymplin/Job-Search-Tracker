@@ -37,14 +37,6 @@ public class JobListingDetails extends AbstractEntity {
     public JobListingDetails() {
     }
 
-//    public JobListingDetails(JobListing jobListing) {
-//
-//        this(jobListing, "", "", "");
-//    }
-
-
-
-
     public JobListingDetails(String company) {
         this.company = company;
     }
@@ -103,6 +95,20 @@ public class JobListingDetails extends AbstractEntity {
         } else {
             this.jobDescription = jobDescription;
         }
+    }
+
+    public void editJobListingDetails(String company, String jobListingUrl,
+                                     String jobListingNumber, String jobLocation,
+                                     String jobType, String jobSalary,
+                                     String jobQualifications, String jobDescription) {
+        setCompany(company);
+        setJobListingUrl(jobListingUrl);
+        setJobListingNumber(jobListingNumber);
+        setJobLocation(jobLocation);
+        setJobType(jobType);
+        setJobSalary(jobSalary);
+        setJobQualifications(jobQualifications);
+        setJobDescription(jobDescription);
     }
 
     public String getCompany() {

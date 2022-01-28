@@ -1,12 +1,9 @@
 package org.launchcode.jobsearchtracker.data;
 
 import org.launchcode.jobsearchtracker.models.JobListing;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface JobListingRepository extends CrudRepository<JobListing, Integer> {
-
+public interface JobListingRepository extends JpaRepository<JobListing, Integer> {
 }
