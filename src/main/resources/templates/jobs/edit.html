@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
+<head th:replace="fragments :: head-jobs">
 </head>
 <body>
     <header th:replace="fragments :: header"></header>
@@ -11,49 +11,50 @@
         <form th:action="@{/jobs/edit/{id}(id=${id})}" th:object="${jobListing}" method="POST">
             <div class="form-group">
                 <label>Job Title
-                    <input type="text" th:name="jobTitle" th:field="*{jobTitle}" />
+                    <input type="text" th:name="jobTitle" th:value="*{jobTitle}" />
                 </label>
             </div>
             <div class="form-group">
                 <label>Company
-                    <input type="text" th:name="company" th:field="*{jobListingDetails.company}"/>
+                    <input type="text" th:name="company" th:value="*{jobListingDetails.company}" />
                 </label>
             </div>
             <div class="form-group">
                 <label>Job Listing URL
-                    <input type="url" th:name="jobListingUrl" th:field="*{jobListingDetails.jobListingUrl}"/>
+                    <input type="url" th:name="jobListingUrl" th:value="*{jobListingDetails.jobListingUrl}"/>
                 </label>
             </div>
             <div class="form-group">
                 <label>Job Listing Number
-                    <input type="text" th:name="jobListingNumber" th:field="*{jobListingDetails.jobListingNumber}" />
+                    <input type="text" th:name="jobListingNumber" th:value="*{jobListingDetails.jobListingNumber}" />
                 </label>
             </div>
             <div class="form-group">
                 <label>Location
-                    <input type="text" th:name="jobLocation" th:field="*{jobListingDetails.jobLocation}" />
+                    <input type="text" th:name="jobLocation" th:value="*{jobListingDetails.jobLocation}" />
                 </label>
             </div>
             <div class="form-group">
                 <label>Job Type
-                    <input type="text" th:name="jobType" th:field="*{jobListingDetails.jobType}" />
+                    <input type="text" th:name="jobType" th:value="*{jobListingDetails.jobType}" />
                 </label>
             </div>
             <div class="form-group">
                 <label>Salary
-                    <input type="text" th:name="salary" th:field="*{jobListingDetails.jobSalary}"/>
+                    <input type="text" th:name="salary" th:value="*{jobListingDetails.jobSalary}"/>
                 </label>
             </div>
             <div class="form-group">
                 <label>Qualifications
-                    <textarea th:name="jobQualifications" th:filed="*{jobListingDetails.jobQualifications}" rows="4"
+                    <textarea th:name="jobQualifications" th:value="*{jobListingDetails.jobQualifications}" rows="4"
                               cols="50">
                     </textarea>
                 </label>
             </div>
             <div class="form-group">
                 <label>Description
-                    <textarea th:name="jobDescription" th:field="*{jobListingDetails.jobDescription}" rows="4" cols="50">
+                    <textarea th:name="jobDescription" th:value="*{jobListingDetails.jobDescription}" rows="4"
+                              cols="50">
                     </textarea>
                 </label>
             </div>
@@ -64,7 +65,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Save Job Listing" class="btn btn btn-success"/>
+                <input type="submit" value="Save Job Listing" class="btn btn-success"/>
             </div>
         </form>
     </main>

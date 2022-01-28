@@ -37,14 +37,6 @@ public class JobListingDetails extends AbstractEntity {
     public JobListingDetails() {
     }
 
-//    public JobListingDetails(JobListing jobListing) {
-//
-//        this(jobListing, "", "", "");
-//    }
-
-
-
-
     public JobListingDetails(String company) {
         this.company = company;
     }

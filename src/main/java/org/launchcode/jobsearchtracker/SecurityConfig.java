@@ -110,27 +110,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().permitAll()
                 .logoutSuccessUrl("/login")
                 .and()
+//                .rememberMe()
+//                .and()
                 .exceptionHandling().accessDeniedPage("/403");
     }
-
-
-    //    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web
-//                .ignoring()
-//                .antMatchers("../static/**");
-//    }
-
-//    // okta tutorial
-//    @Override
-//    protected void configure(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity
-//                .csrf().disable()
-//                .antMatcher("/**")
-//                .authorizeRequests()
-//                .antMatchers("/", "/login.html","/login**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .oauth2Login();
-//    }
 }

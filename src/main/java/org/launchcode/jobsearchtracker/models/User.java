@@ -102,5 +102,8 @@ public class User extends AbstractEntity {
         this.jobListings.add(jobListing);
     }
 
+    public boolean deleteJobListing(JobListing jobListing) {
+        return this.jobListings.remove(jobListing);
+    }
 
 }
