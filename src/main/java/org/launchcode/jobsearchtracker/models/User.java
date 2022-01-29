@@ -116,7 +116,8 @@ public class User extends AbstractEntity {
             for (JobListing job : jobListings) {
                 JobListingDetails jobListingDetails = job.getJobListingDetails();
 
-                if (jobListingDetails.getCompany().toLowerCase().contains(lower_val)) {
+                String company = jobListingDetails.getCompany();
+                if (company != null && company.toLowerCase().contains(lower_val)) {
                     results.add(job);
                 }
             }
@@ -124,7 +125,8 @@ public class User extends AbstractEntity {
             for (JobListing job : jobListings) {
                 JobListingDetails jobListingDetails = job.getJobListingDetails();
 
-                if (jobListingDetails.getJobType().toLowerCase().contains(lower_val)) {
+                String jobType = jobListingDetails.getJobType();
+                if (jobType != null && jobType.toLowerCase().contains(lower_val)) {
                     results.add(job);
                 }
             }
@@ -132,7 +134,8 @@ public class User extends AbstractEntity {
             for (JobListing job : jobListings) {
                 JobListingDetails jobListingDetails = job.getJobListingDetails();
 
-                if (jobListingDetails.getJobLocation().toLowerCase().contains(lower_val)) {
+                String location = jobListingDetails.getJobLocation();
+                if (location != null && location.toLowerCase().contains(lower_val)) {
                     results.add(job);
                 }
             }

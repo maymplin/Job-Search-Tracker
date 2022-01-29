@@ -27,12 +27,13 @@
                     </td>
                     <td>
                         <li th:each="type : ${jobTypes}">
-                            <a th:text="${type}"></a>
+                            <a th:href="@{/list/jobs/(fieldName='jobType', value=${jobType})}" th:text="${type}"></a>
                         </li>
                     </td>
                     <td>
                         <li th:each="location : ${locations}">
-                            <a th:text="${location}"></a>
+                            <a th:href="@{/list/jobs/(fieldName='location', value=${jobLocation})}"
+                               th:text="${location}"></a>
                         </li>
                     </td>
                 </tr>
