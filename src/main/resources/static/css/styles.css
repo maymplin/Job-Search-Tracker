@@ -44,3 +44,8 @@ body {
 .title {
     text-align: center;
 }
+
+#listing-table th,
+#listing-table td {
+    width: 33%;
+}

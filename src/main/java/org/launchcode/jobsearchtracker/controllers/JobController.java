@@ -55,24 +55,21 @@ public class JobController {
             ) {
 
         User user = userRepository.findByUsername(username);
-//        System.out.println("user.getUsername() = "+ user.getUsername());
-
-//        JobListingDetails newJobListingDetails = new JobListingDetails(company);
 
         JobListingDetails newJobListingDetails =
                 new JobListingDetails(company, jobListingUrl, jobListingNumber,
                         jobLocation, jobType, salary, jobQualifications,
                         jobDescription);
+
         jobListingDetailsRepository.save(newJobListingDetails);
-//        System.out.println("newJobListingDetails.getCompany() = "+ newJobListingDetails.getCompany());
 
         JobListing newJobListing = new JobListing(
                 jobTitle,
                 newJobListingDetails,
                 user);
-//        System.out.println("newJobListing.getUser().getUsername() = "+ newJobListing.getUser().getUsername());
+
         jobListingRepository.save(newJobListing);
-//        System.out.println("newJobListing.getJobTitle() = "+ newJobListing.getJobTitle());
+
         user.addJobListing(newJobListing);
 
         return "redirect:../dashboard";
@@ -145,9 +142,8 @@ public class JobController {
             jobListingRepository.save(jobListing);
 
             JobListingDetails listingDetails = jobListing.getJobListingDetails();
-            int jobListingDetailsId = listingDetails.getId();
             Optional<JobListingDetails> resultDetails =
-                    jobListingDetailsRepository.findById(jobListingDetailsId);
+                    jobListingDetailsRepository.findById(listingDetails.getId());
 
             if (resultDetails.isEmpty()) {
                 model.addAttribute("Title",

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+    <header th:replace="fragments :: header"></header>
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <main>
+        <h4 th:replace="fragments :: title">list.html</h4>
+
+        <table id="listing-table" class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Companies</th>
+                    <th scope="col">Job Types</th>
+                    <th scope="col">Locations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <li th:each="company : ${companies}">
+                            <a th:href="@{/list/jobs/(fieldName='company', value=${company})}" th:text="${company}"></a>
+                        </li>
+                    </td>
+                    <td>
+                        <li th:each="type : ${jobTypes}">
+                            <a th:text="${type}"></a>
+                        </li>
+                    </td>
+                    <td>
+                        <li th:each="location : ${locations}">
+                            <a th:text="${location}"></a>
+                        </li>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </main>
+</body>
+</html>

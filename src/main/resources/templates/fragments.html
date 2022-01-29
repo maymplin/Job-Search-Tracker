@@ -36,17 +36,20 @@
         </div>
     </div>
 </header>
+
 <nav th:fragment="navigation">
     <div class="nav-container">
         <div class="nav-column-left">
             <a th:href="@{/dashboard}">Dashboard</a>
         </div>
         <div class="nav-column-right">
-            <a href="">List My Jobs</a>
+            <a th:href="@{/list}">List My Jobs</a>
             <a href="">Search My Jobs</a>
         </div>
     </div>
 </nav>
+
+<h4 th:fragment="title" th:text="${title}">title placeholder</h4>
 
 </body>
 </html>

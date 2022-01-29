@@ -106,4 +106,39 @@ public class User extends AbstractEntity {
         return this.jobListings.remove(jobListing);
     }
 
+    public static ArrayList<JobListing> findJobListingsByValue(String fieldName, String value,
+                                                      Iterable<JobListing> jobListings) {
+        String lower_val = value.toLowerCase();
+
+        ArrayList<JobListing> results = new ArrayList<>();
+
+        if (fieldName.equals("company")) {
+            for (JobListing job : jobListings) {
+                JobListingDetails jobListingDetails = job.getJobListingDetails();
+
+                if (jobListingDetails.getCompany().toLowerCase().contains(lower_val)) {
+                    results.add(job);
+                }
+            }
+        } else if (fieldName.equals("jobType")) {
+            for (JobListing job : jobListings) {
+                JobListingDetails jobListingDetails = job.getJobListingDetails();
+
+                if (jobListingDetails.getJobType().toLowerCase().contains(lower_val)) {
+                    results.add(job);
+                }
+            }
+        } else if (fieldName.equals("location")) {
+            for (JobListing job : jobListings) {
+                JobListingDetails jobListingDetails = job.getJobListingDetails();
+
+                if (jobListingDetails.getJobLocation().toLowerCase().contains(lower_val)) {
+                    results.add(job);
+                }
+            }
+        }
+
+        return results;
+    }
+
 }
