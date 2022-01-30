@@ -73,7 +73,7 @@ public class ListController {
                                   Principal principal) {
         User user = userRepository.findByUsername(principal.getName());
 
-        Iterable<JobListing> jobListings = user.findJobListingsByValue(fieldName,value, user.getJobListings());
+        Iterable<JobListing> jobListings = user.findJobListingsByValue(fieldName, value, user.getJobListings());
 
         model.addAttribute("title", "Jobs with " + fieldName + ": " + value);
 
