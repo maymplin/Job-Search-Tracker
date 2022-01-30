@@ -139,6 +139,14 @@ public class User extends AbstractEntity {
                     results.add(job);
                 }
             }
+        } else if (fieldName.equals("jobTitle")) {
+            for (JobListing job : jobListings) {
+                String jobTitle = job.getJobTitle();
+
+                if (jobTitle != null && jobTitle.toLowerCase().contains(lower_val)) {
+                    results.add(job);
+                }
+            }
         }
 
         return results;
