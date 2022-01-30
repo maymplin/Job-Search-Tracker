@@ -1,50 +1,36 @@
-body {
-    margin: 10px;
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  background-color: #003399;
 }
 
-.header-container {
-    display: grid;
-    grid-template-columns: 0.5fr 2fr 0.5fr;
-    grid-template-rows: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    height: 75px;
-    background-color: blue;
+.nav-link-color {
+  color: #FBFAF5;
 }
 
-.header-column-side {
-    background-color: yellow;
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  padding-top: 20px;
+  background-color: #003399;
+  height: 100%;
 }
 
-.header-column-main {
-    background-color: black;
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
 }
 
-.nav-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    height: 30px;
-}
-
-.nav-column-right {
-
-}
-
-.dashboard-container {
-    display: flex;
-}
-
-.dashboard-goals {
-}
-
-.title {
-    text-align: center;
-}
-
-#listing-table th,
-#listing-table td {
-    width: 33%;
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height:auto;}
 }
