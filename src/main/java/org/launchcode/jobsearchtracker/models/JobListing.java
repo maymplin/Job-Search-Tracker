@@ -5,6 +5,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class JobListing extends AbstractEntity {
@@ -27,6 +29,9 @@ public class JobListing extends AbstractEntity {
     @Valid
     @NotNull
     private JobListingDetails jobListingDetails;
+
+    @ManyToMany
+    private final List<Contact> contacts = new ArrayList<>();
 
     public JobListing() {
     }
@@ -91,5 +96,17 @@ public class JobListing extends AbstractEntity {
 
     public void setJobListingDetails(JobListingDetails jobListingDetails) {
         this.jobListingDetails = jobListingDetails;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void addContact(Contact contact) {
+        this.contacts.add(contact);
+    }
+
+    public void removeContact(Contact contact) {
+        this.contacts.remove(contact);
     }
 }
