@@ -7,12 +7,12 @@
     <nav th:replace="fragments :: navigation"></nav>
 
     <main>
-        <div class="container">
+        <div class="container body-content">
             <form th:action="@{/search/results}" method="POST">
-                <div class="form-group">
-                    <div class="custom-control">
+                <div class="form-group mb-2">
+                    <div class="form-control-plaintext">
                         <input type="text" name="searchTerm">
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-dark mb-2">Search</button>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="company" name="searchCategory" value="company" checked>

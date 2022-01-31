@@ -6,7 +6,9 @@
     <header th:replace="fragments :: header"></header>
     <nav th:replace="fragments :: navigation"></nav>
 
-    <main>
+
+    <div>
+        <div class="container body-content">
 <!--        <h4 th:text="${title}">add.html</h4>-->
         <h4 th:replace="fragments :: title">add.html</h4>
         <form th:action="@{/jobs/add}" method="POST">
@@ -57,17 +59,18 @@
                     </textarea>
                 </label>
             </div>
-            <div class="form-group">
-                <label>User
-                    <input type="text" th:value="${username}" th:name="username" readonly>
-                </label>
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label>User-->
+<!--                    <input type="text" th:value="${username}" th:name="username" readonly>-->
+<!--                </label>-->
+<!--            </div>-->
 
             <div class="form-group">
-                <input type="submit" value="Add Job Listing" class="btn btn btn-success"/>
+                <input type="submit" value="Add Job Listing" class="btn btn-dark"/>
             </div>
         </form>
-    </main>
+        </div>
+    </div>
 
 </body>
 </html>

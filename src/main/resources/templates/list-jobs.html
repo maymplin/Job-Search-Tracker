@@ -8,10 +8,9 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <div class="container body-content">
-
     <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
-    <table class="job-listing">
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>ID</th>
@@ -31,6 +30,8 @@
     </table>
 
 </div>
+
+
 
 </body>
 </html>

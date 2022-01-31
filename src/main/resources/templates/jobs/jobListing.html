@@ -8,7 +8,7 @@
 
     <h4 th:replace="fragments :: title">jobListing.html</h4>
 
-    <hr />
+   <div class="container body-content">
 
     <div class="job-block">
         <p><b>Listing URL: </b></p><a th:href="${details.jobListingUrl}">original job posting</a><br />
@@ -20,13 +20,14 @@
         <p th:text="${details.jobQualifications}"></p>
         <p><b>Description: </b><p th:text="${details.jobDescription}"></p></p><br />
     </div>
-    <button class="btn">
+    <button class="btn btn-dark">
         <a th:href="@{edit/{id}(id=${id})}">Edit Job Details</a>
     </button>
-    <button class="btn">
+    <button class="btn btn-dark">
         <form th:action="@{/jobs/{id}(id=${id})}" method="post">
             <input type="submit" value="Delete Job">
         </form>
     </button>
+   </div>
 </body>
 </html>

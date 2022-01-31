@@ -7,6 +7,7 @@
     <nav th:replace="fragments :: navigation"></nav>
 
     <main>
+        <div class="container body-content">
         <h4 th:replace="fragments :: title">edit.html</h4>
         <form th:action="@{/jobs/edit/{id}(id=${id})}" th:object="${jobListing}" method="POST">
             <div class="form-group">
@@ -58,22 +59,26 @@
                     </textarea>
                 </label>
             </div>
-            <div class="form-group">
-                <label>User
-                    <input type="text" th:value="${username}" th:name="username" readonly>
-                </label>
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label>User-->
+<!--                    <input type="text" th:value="${username}" th:name="username" readonly>-->
+<!--                </label>-->
+<!--            </div>-->
 
+            <br />
             <div class="form-group">
-                <input type="submit" value="Save Job Edit" class="btn btn-success"/>
+                <input type="submit" value="Save Job Edit" class="btn btn-dark"/>
             </div>
             <div>
-                <button class="btn"><a th:href=@{/dashboard}>Cancel Job Edit</a></button>
+                <button
+                        class="btn btn-dark"><a th:href=@{/dashboard}
+                                                style="color: white; text-decoration: none;">Cancel Job Edit</a></button>
             </div>
         </form>
         <form th:action="@{/jobs/{id}(id=${id})}" method="post">
-            <input type="submit" value="Delete Job">
+            <button type="submit" class="btn btn-dark">Delete Job</button>
         </form>
+        </div>
 
     </main>
 </body>
