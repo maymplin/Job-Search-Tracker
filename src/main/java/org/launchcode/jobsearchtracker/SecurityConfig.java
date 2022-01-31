@@ -16,10 +16,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 
 @Configuration
@@ -31,6 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DataSource dataSource;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -51,11 +57,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource);
+        return tokenRepository;
+    }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                    .antMatchers("/resources/static/**");
+                    .antMatchers("css/**", "/resources/static/**");
     }
 
     @Override
@@ -106,6 +119,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             response.sendRedirect("/dashboard");
                         }
                     })
+                .and()
+                .rememberMe().tokenRepository(persistentTokenRepository())
                 .and()
                 .logout().permitAll()
                 .logoutSuccessUrl("/login")
