@@ -125,8 +125,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().permitAll()
                 .logoutSuccessUrl("/login")
                 .and()
-//                .rememberMe()
-//                .and()
                 .exceptionHandling().accessDeniedPage("/403");
     }
 }
