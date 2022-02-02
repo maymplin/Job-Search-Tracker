@@ -10,94 +10,62 @@
 
    <div class="container body-content">
     <br>
-       <form th:action="@{/jobs/edit/{id}(id=${id})}" class="row g-3"
-             th:object="${listing}" method="POST">
-           <div class="col-md-6">
-               <label class="form-label">Job Title</label>
-               <input class="form-control" readonly type="text"
-                      th:name="jobTitle" th:value="*{jobTitle}" />
-           </div>
-           <div class="col-md-6">
-               <label class="form-label">Company</label>
-               <input class="form-control" readonly type="text"
-                      th:name="company" th:value="*{jobListingDetails.company}" />
-           </div>
-           <div class="col-md-6">
-               <label class="form-label">Location</label>
-               <input class="form-control" readonly type="text"
-                      th:name="jobLocation" th:value="*{jobListingDetails.jobLocation}" />
-           </div>
-           <div class="col-md-6">
-               <label class="form-label">Job Listing URL</label>
-               <input class="form-control" readonly type="url"
-                      th:name="jobListingUrl" th:value="*{jobListingDetails.jobListingUrl}"/>
-           </div>
-           <div class="col-md-3">
-               <label class="form-label">Job Listing Number</label>
-               <input class="form-control" readonly type="text"
-                      th:name="jobListingNumber" th:value="*{jobListingDetails.jobListingNumber}" />
-           </div>
-           <div class="col-md-3">
-               <label class="form-label">Salary</label>
-               <input class="form-control" readonly type="text"
-                      th:name="salary" th:value="*{jobListingDetails.jobSalary}"/>
-           </div>
-           <div class="col-md-6">
-               <label class="form-label">Job Type</label>
-               <input class="form-control" readonly type="text"
-                      th:name="jobType" th:value="*{jobListingDetails.jobType}" />
-           </div>
 
-           <div class="col-md-6">
-               <label class="form-label">Qualifications</label>
-               <textarea  class="form-control" readonly
-                          th:name="jobQualifications"
-                          th:value="*{jobListingDetails.jobQualifications}"
-                          rows="4"></textarea>
-           </div>
-           <div class="col-md-6">
-               <label class="form-label">Description</label>
-               <textarea class="form-control" readonly
-                         th:name="jobDescription"
-                         th:value="*{jobListingDetails.jobDescription}" rows="4"></textarea>
-           </div>
-           <!--            <div class="col-md-6">-->
-           <!--                <label class="form-label">User-->
-           <!--                    <input type="text" th:value="${username}" th:name="username" readonly>-->
-           <!--                </label>-->
-           <!--            </div>-->
+<!--       <div class="container">-->
+<!--           <div class="row">-->
+<!--               <div class="col-9">.col-9</div>-->
+<!--               <div class="col-4">.col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>-->
+<!--               <div class="col-6">.col-6<br>Subsequent columns continue along the new line.</div>-->
+<!--           </div>-->
+<!--       </div>-->
 
-           <br />
-           <div class="col-md-3">
-               <button class="btn btn-dark">
-                   <a th:href="@{edit/{id}(id=${id})}">Edit Job Details</a>
-               </button>
+       <div class="card" th:object="${listing}">
+<!--   th:text="${T(java.lang.String).format(myObject.stringFormatMessage,myObject.param)}"
+       th:text="'The name of the user is ' + ${user.name}"-->
+<!--           <h5 class="card-header" th:text="*{jobTitle}">Job Title</h5>-->
+           <h5 class="card-header" th:text="'Job Title: ' + ${listing.jobTitle}">Job Title: </h5>
+           <div class="card-body">
+
+               <div class="container">
+                   <div class="row p-2">
+                       <div class="col-3 fw-bold">Company</div>
+                       <div class="col-6" th:text="*{jobListingDetails.company}"></div>
+                   </div>
+                   <div class="row p-2">
+                       <div class="col-3 fw-bold">Location</div>
+                       <div class="col-6" th:text="*{jobListingDetails.jobLocation}"></div>
+                   </div>
+                   <div class="row p-2">
+                       <div class="col-3 fw-bold">Job Type</div>
+                       <div class="col-6" th:text="*{jobListingDetails.jobType}"></div>
+                   </div>
+                   <div class="row p-2">
+                       <div class="col-3 fw-bold">Salary</div>
+                       <div class="col-6" th:text="*{jobListingDetails.jobSalary}"></div>
+                   </div>
+                   <div class="row p-2">
+                       <div class="col-3 fw-bold">Job Listing URL</div>
+                       <div class="col-6" th:text="*{jobListingDetails.jobListingUrl}"></div>
+                   </div>
+                   <div class="row p-2">
+                       <div class="col-3 fw-bold">Qualifications</div>
+                       <div class="col-6" th:text="*{jobListingDetails.jobQualifications}"></div>
+                   </div>
+                   <div class="row p-2">
+                       <div class="col-3 fw-bold">Description</div>
+                       <div class="col-6" th:text="*{jobListingDetails.jobDescription}"></div>
+                   </div>
+               </div>
+
+               <a th:href="@{edit/{id}(id=${id})}" class="btn btn-primary">Edit Job Details</a>
            </div>
-       </form>
+       </div>
        <br>
        <form  class="row g-3" th:action="@{/jobs/{id}(id=${id})}" method="post">
            <div class="col-md-2">
                <button type="submit" class="btn btn-danger">Delete Job</button>
            </div>
        </form>
-<!--    <div class="job-block">-->
-<!--        <p><b>Listing URL: </b></p><a th:href="${details.jobListingUrl}">original job posting</a><br />-->
-<!--        <th:block th:if="${details.jobListingNumber}"><p><b></b></p><br /></th:block>-->
-<!--        <p><b>Location: </b><p th:text="${details.jobLocation}"></p><br />-->
-<!--        <p><b>Job Type: </b><p th:text="${details.jobType}"></p></p><br />-->
-<!--        <p><b>Salary: </b><p th:text="${details.jobSalary}"></p></p><br />-->
-<!--        <p><b>Qualifications: </b></p><br />-->
-<!--        <p th:text="${details.jobQualifications}"></p>-->
-<!--        <p><b>Description: </b><p th:text="${details.jobDescription}"></p></p><br />-->
-<!--    </div>-->
-<!--    <button class="btn btn-dark">-->
-<!--        <a th:href="@{edit/{id}(id=${id})}">Edit Job Details</a>-->
-<!--    </button>-->
-<!--    <button class="btn btn-dark">-->
-<!--        <form th:action="@{/jobs/{id}(id=${id})}" method="post">-->
-<!--            <input type="submit" value="Delete Job">-->
-<!--        </form>-->
-<!--    </button>-->
    </div>
 </body>
 </html>

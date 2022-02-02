@@ -43,13 +43,14 @@
 
             <div class="col-md-6">
                 <label class="form-label">Qualifications</label>
-                <textarea  class="form-control" th:name="jobQualifications" th:value="*{jobListingDetails.jobQualifications}"
+                <textarea  class="form-control" th:name="jobQualifications"
+                           th:placeholder="*{jobListingDetails.jobQualifications}"
                            rows="4"></textarea>
             </div>
             <div class="col-md-6">
                 <label class="form-label">Description</label>
                 <textarea class="form-control" th:name="jobDescription"
-                          th:value="*{jobListingDetails.jobDescription}" rows="4"></textarea>
+                          th:placeholder="*{jobListingDetails.jobDescription}" rows="4"></textarea>
             </div>
 <!--            <div class="col-md-6">-->
 <!--                <label class="form-label">User-->
@@ -58,11 +59,13 @@
 <!--            </div>-->
 
             <br />
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <input type="submit" value="Save Job Edit" class="btn btn-dark"/>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-dark"><a th:href=@{/dashboard}>Cancel Job Edit</a></button>
+                <button class="btn btn-dark">
+                    <a th:href="@{/dashboard}" class="buttonLink">Cancel Job Edit</a>
+                </button>
             </div>
         </form>
             <br>
