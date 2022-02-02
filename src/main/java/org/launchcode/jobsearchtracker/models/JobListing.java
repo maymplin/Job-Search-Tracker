@@ -31,7 +31,7 @@ public class JobListing extends AbstractEntity {
     private JobListingDetails jobListingDetails;
 
     @ManyToMany
-    private final List<Contact> contacts = new ArrayList<>();
+    private List<Contact> contacts = new ArrayList<>();
 
     public JobListing() {
     }

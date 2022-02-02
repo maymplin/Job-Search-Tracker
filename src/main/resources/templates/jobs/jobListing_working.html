@@ -80,15 +80,16 @@
                <button type="submit" class="btn btn-danger">Delete Job</button>
            </div>
        </form>
-
        <hr>
-
+       <table th:if="${contacts != null}">
+       </table>
        <div>
            <button class="btn btn-dark">
                <a th:href="@{../contacts/add/{id}(id=${id})}" class="nav-link-color nav-link-no-underline">Add
                    Contact</a>
            </button>
        </div>
+
    </div>
 
 </body>

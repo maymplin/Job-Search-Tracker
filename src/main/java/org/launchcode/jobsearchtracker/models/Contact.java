@@ -22,7 +22,7 @@ public class Contact extends AbstractEntity {
 
     private String notes;
 
-    @ManyToMany
+    @ManyToMany(mappedBy="contacts")
     private final List<JobListing> jobListings = new ArrayList<>();
 
     public Contact() {
