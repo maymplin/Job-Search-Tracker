@@ -87,4 +87,14 @@ public class Contact extends AbstractEntity {
     public void removeJobListing(JobListing job) {
         jobListings.remove(job);
     }
+
+    public void editContact(String firstName, String lastName, String jobTitle,
+                            String phoneNumber, String email, String notes) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.jobTitle = jobTitle;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.notes = notes;
+    }
 }

@@ -12,6 +12,10 @@
     text-decoration: none;
 }
 
+.nav-link-color:hover {
+   color: #FBFAF5;
+}
+
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {height: 450px}
 
@@ -31,6 +35,11 @@ footer {
 
 .div-inline {
   display: inline-block;
+}
+
+.table-contacts {
+    border: 1px solid #E0E0E0;
+
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */

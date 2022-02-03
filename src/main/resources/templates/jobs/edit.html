@@ -59,10 +59,14 @@
 
             <br />
             <div class="col-md-2">
-                <input type="submit" value="Save Job Edit" class="btn btn-dark"/>
+                <input type="submit" value="Save Job Edit" class="btn btn-primary"/>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-dark"><a th:href=@{/dashboard}>Cancel Job Edit</a></button>
+                <button class="btn btn-dark">
+                    <a th:href="@{/dashboard}" class="nav-link-color nav-link-no-underline">
+                        Cancel Changes
+                    </a>
+                </button>
             </div>
         </form>
             <br>
