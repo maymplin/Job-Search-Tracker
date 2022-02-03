@@ -3,13 +3,13 @@
 <head th:replace="fragments :: head">
 </head>
 <body>
-    <header th:replace="fragments :: header"></header>
-    <nav th:replace="fragments :: navigation"></nav>
+<header th:replace="fragments :: header"></header>
+<nav th:replace="fragments :: navigation"></nav>
 
-    <main>
-        <div class="container body-content">
+<main>
+    <div class="container body-content">
         <h4 th:replace="fragments :: title">edit.html</h4>
-            <br>
+        <br>
         <form th:action="@{/jobs/edit/{id}(id=${id})}" class="row g-3"
               th:object="${jobListing}" method="POST">
             <div class="col-md-6">
@@ -52,48 +52,31 @@
                 <textarea class="form-control" th:name="jobDescription"
                           th:placeholder="*{jobListingDetails.jobDescription}" rows="4"></textarea>
             </div>
-<!--            <div class="col-md-6">-->
-<!--                <label class="form-label">User-->
-<!--                    <input type="text" th:value="${username}" th:name="username" readonly>-->
-<!--                </label>-->
-<!--            </div>-->
+            <!--            <div class="col-md-6">-->
+            <!--                <label class="form-label">User-->
+            <!--                    <input type="text" th:value="${username}" th:name="username" readonly>-->
+            <!--                </label>-->
+            <!--            </div>-->
 
             <br />
-<<<<<<< HEAD
-            <div class="col-md-2">
-                <input type="submit" value="Save Job Edit" class="btn btn-primary"/>
-||||||| merged common ancestors
-            <div class="col-md-2">
-                <input type="submit" value="Save Job Edit" class="btn btn-dark"/>
-=======
             <div class="col-md-3">
                 <input type="submit" value="Save Job Edit" class="btn btn-dark"/>
->>>>>>> main
             </div>
             <div class="col-md-3">
-<<<<<<< HEAD
                 <button class="btn btn-dark">
-                    <a th:href="@{/dashboard}" class="nav-link-color nav-link-no-underline">
-                        Cancel Changes
-                    </a>
+                    <a th:href="@{/dashboard}" class="buttonLink nav-link-color nav-link-no-underline">Cancel Job
+                        Edit</a>
                 </button>
-||||||| merged common ancestors
-                <button class="btn btn-dark"><a th:href=@{/dashboard}>Cancel Job Edit</a></button>
-=======
-                <button class="btn btn-dark">
-                    <a th:href="@{/dashboard}" class="buttonLink">Cancel Job Edit</a>
-                </button>
->>>>>>> main
             </div>
         </form>
-            <br>
+        <br>
         <form  class="row g-3" th:action="@{/jobs/{id}(id=${id})}" method="post">
             <div class="col-md-2">
                 <button type="submit" class="btn btn-danger">Delete Job</button>
             </div>
         </form>
-        </div>
+    </div>
 
-    </main>
+</main>
 </body>
 </html>

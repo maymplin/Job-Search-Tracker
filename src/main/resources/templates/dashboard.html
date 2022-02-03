@@ -13,15 +13,15 @@
                 <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
                 <br />
                 <div class="dashboard-goals">
-                    <p>Today you sent XXX resumes. Just XXX more to your daily goal!</p>
-                    <p>This week you have XXX job-search appointments/interviews.</p>
+                    <p>Today you sent 2 resumes. Just 3 more to your daily goal!</p>
+                    <p class="text text-success">This week you have 3 job-search appointments/interviews.</p>
                     <hr />
                 </div>
 
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
+<!--                            <th>ID</th>-->
                             <th>Job Title</th>
                             <th>Company Name</th>
                             <th></th>
@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tr th:each="job : ${jobs}">
-                        <td th:text="${job.id}"></td>
+<!--                        <td th:text="${job.id}"></td>-->
                         <td th:text="${job.jobTitle}"></a></td>
                         <td th:text="${job.jobListingDetails.company}"></td>
                         <td>
