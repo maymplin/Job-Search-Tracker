@@ -23,7 +23,7 @@
             <!--   th:text="${T(java.lang.String).format(myObject.stringFormatMessage,myObject.param)}"
                    th:text="'The name of the user is ' + ${user.name}"-->
             <!--           <h5 class="card-header" th:text="*{jobTitle}">Job Title</h5>-->
-            <h5 class="card-header" th:text="'Job Title: ' + ${listing.jobTitle}">Job Title: </h5>
+            <h5 class="card-header" th:text="${listing.jobTitle}">Job Title: </h5>
             <div class="card-body">
 
                 <div class="container">
@@ -66,7 +66,7 @@
                 <button type="submit" class="btn btn-danger">Delete Job</button>
             </div>
         </form>
-    </div>
+
 
        <hr>
 

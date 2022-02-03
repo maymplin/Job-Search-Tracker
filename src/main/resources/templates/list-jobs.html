@@ -14,7 +14,7 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>ID</th>
+<!--            <th>ID</th>-->
             <th>Job Title</th>
             <th>Company Name</th>
             <th>Location</th>
@@ -22,11 +22,19 @@
         </tr>
         </thead>
         <tr th:each="job : ${jobListings}">
-                <td th:text="${job.id}"></td>
-                <td><a th:href="@{/jobs/{id}(id=${job.id})}" th:text="${job.jobTitle}"></a></td>
-                <td><a th:href="@{/jobs/{id}(id=${job.id})}" th:text="${job.jobListingDetails.company}"></a></td>
-                <td><a th:href="@{/jobs/{id}(id=${job.id})}" th:text="${job.jobListingDetails.jobLocation}"></a></td>
-                <td><a th:href="@{/jobs/{id}(id=${job.id})}" th:text="${job.jobListingDetails.getJobType}"></a></td>
+<!--                <td th:text="${job.id}"></td>-->
+                <td><a th:href="@{/jobs/{id}(id=${job.id})}"
+                       th:text="${job.jobTitle}"
+                       style="text-decoration: none;"></a></td>
+                <td><a th:href="@{/jobs/{id}(id=${job.id})}"
+                       th:text="${job.jobListingDetails.company}"
+                       style="text-decoration: none;"></a></td>
+                <td><a th:href="@{/jobs/{id}(id=${job.id})}"
+                       th:text="${job.jobListingDetails.jobLocation}"
+                       style="text-decoration: none;"></a></td>
+                <td><a th:href="@{/jobs/{id}(id=${job.id})}"
+                       th:text="${job.jobListingDetails.getJobType}"
+                       style="text-decoration: none;"></a></td>
         </tr>
     </table>
 

@@ -23,18 +23,23 @@
                 <tr>
                     <td>
                         <li th:each="company : ${companies}" class="p-2">
-                            <a th:href="@{/list/jobs/(fieldName='company', value=${company})}" th:text="${company}"></a>
+                            <a th:href="@{/list/jobs/(fieldName='company', value=${company})}"
+                               th:text="${company}"
+                               style="text-decoration: none;"></a>
                         </li>
                     </td>
                     <td>
                         <li th:each="type : ${jobTypes}" class="p-2">
-                            <a th:href="@{/list/jobs/(fieldName='jobType', value=${type})}" th:text="${type}"></a>
+                            <a th:href="@{/list/jobs/(fieldName='jobType', value=${type})}"
+                               th:text="${type}"
+                               style="text-decoration: none;"></a>
                         </li>
                     </td>
                     <td>
                         <li th:each="location : ${locations}" class="p-2">
                             <a th:href="@{/list/jobs/(fieldName='location', value=${location})}"
-                               th:text="${location}"></a>
+                               th:text="${location}"
+                               style="text-decoration: none;"></a>
                         </li>
                     </td>
                 </tr>
