@@ -8,6 +8,7 @@
   color: #FBFAF5;
 }
 
+<<<<<<< HEAD
 .nav-link-no-underline {
     text-decoration: none;
 }
@@ -16,6 +17,13 @@
    color: #FBFAF5;
 }
 
+||||||| merged common ancestors
+=======
+.buttonLink {
+  color: white;
+}
+
+>>>>>>> main
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {height: 450px}
 

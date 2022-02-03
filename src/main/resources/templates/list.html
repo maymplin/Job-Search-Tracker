@@ -14,25 +14,25 @@
         <table id="listing-table" class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Companies</th>
-                    <th scope="col">Job Types</th>
-                    <th scope="col">Locations</th>
+                    <th scope="col fs-3">Companies</th>
+                    <th scope="col fs-3">Job Types</th>
+                    <th scope="col fs-3">Locations</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>
-                        <li th:each="company : ${companies}">
+                        <li th:each="company : ${companies}" class="p-2">
                             <a th:href="@{/list/jobs/(fieldName='company', value=${company})}" th:text="${company}"></a>
                         </li>
                     </td>
                     <td>
-                        <li th:each="type : ${jobTypes}">
+                        <li th:each="type : ${jobTypes}" class="p-2">
                             <a th:href="@{/list/jobs/(fieldName='jobType', value=${type})}" th:text="${type}"></a>
                         </li>
                     </td>
                     <td>
-                        <li th:each="location : ${locations}">
+                        <li th:each="location : ${locations}" class="p-2">
                             <a th:href="@{/list/jobs/(fieldName='location', value=${location})}"
                                th:text="${location}"></a>
                         </li>

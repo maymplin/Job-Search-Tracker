@@ -43,13 +43,14 @@
 
             <div class="col-md-6">
                 <label class="form-label">Qualifications</label>
-                <textarea  class="form-control" th:name="jobQualifications" th:value="*{jobListingDetails.jobQualifications}"
+                <textarea  class="form-control" th:name="jobQualifications"
+                           th:placeholder="*{jobListingDetails.jobQualifications}"
                            rows="4"></textarea>
             </div>
             <div class="col-md-6">
                 <label class="form-label">Description</label>
                 <textarea class="form-control" th:name="jobDescription"
-                          th:value="*{jobListingDetails.jobDescription}" rows="4"></textarea>
+                          th:placeholder="*{jobListingDetails.jobDescription}" rows="4"></textarea>
             </div>
 <!--            <div class="col-md-6">-->
 <!--                <label class="form-label">User-->
@@ -58,15 +59,31 @@
 <!--            </div>-->
 
             <br />
+<<<<<<< HEAD
             <div class="col-md-2">
                 <input type="submit" value="Save Job Edit" class="btn btn-primary"/>
+||||||| merged common ancestors
+            <div class="col-md-2">
+                <input type="submit" value="Save Job Edit" class="btn btn-dark"/>
+=======
+            <div class="col-md-3">
+                <input type="submit" value="Save Job Edit" class="btn btn-dark"/>
+>>>>>>> main
             </div>
             <div class="col-md-3">
+<<<<<<< HEAD
                 <button class="btn btn-dark">
                     <a th:href="@{/dashboard}" class="nav-link-color nav-link-no-underline">
                         Cancel Changes
                     </a>
                 </button>
+||||||| merged common ancestors
+                <button class="btn btn-dark"><a th:href=@{/dashboard}>Cancel Job Edit</a></button>
+=======
+                <button class="btn btn-dark">
+                    <a th:href="@{/dashboard}" class="buttonLink">Cancel Job Edit</a>
+                </button>
+>>>>>>> main
             </div>
         </form>
             <br>
