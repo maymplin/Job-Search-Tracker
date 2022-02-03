@@ -89,6 +89,10 @@
                    <td><b>E-Mail</b></td>
                    <td th:text="${contact.email}"></td>
                </tr>
+               <tr th:if="${contact.notes.length()}">
+                   <th>Notes</th>
+                   <td colspan="4" th:text="${contact.notes}"></td>
+               </tr>
                <tr>
                    <td>
                        <button class="btn btn-primary">
@@ -97,12 +101,23 @@
                            Contact</a>
                        </button>
                    </td>
-                   <td><button class="btn btn-danger" type="submit"
-                               formaction="@{/contacts/delete/{contactId}(contactId=${contactId})}"
-                               formmethod="POST">
-                       Delete Contact
-<!--                       <a th:href="@{/contacts/delete/{concatId}(contactId=${contactId})}">Delete Contact</a></button></td>-->
-                   </button></td>
+                   <td>
+                       <form th:action="@{/contacts/delete/{contactId}(contactId=${contact.id})}"
+                            method="POST">
+                           <button class="btn btn-danger" type="submit">
+                           Delete Contact
+    <!--                       <a th:href="@{/contacts/delete/{concatId}(contactId=${contactId})}">Delete Contact</a></button></td>-->
+                           </button>
+                       </form>
+                   </td>
+<!--                   <td>-->
+<!--                       <button class="btn btn-danger">-->
+<!--                           <a th:href="@{../contacts/delete/{contactId}(contactId=${contact.id})}"-->
+<!--                           class="nav-link-color nav-link-no-underline">-->
+<!--                               Delete Contact-->
+<!--                           </a>-->
+<!--                       </button>-->
+<!--                   </td>-->
                    <td colspan="2"></td>
                </tr>
            </table>

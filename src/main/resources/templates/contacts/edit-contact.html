@@ -58,12 +58,12 @@
 
         <div class="col-md-3">
             <button class="btn btn-dark" style="margin-bottom: 5px;">
-                <a th:href="@{/jobs/{id}(id=${id})}" class="nav-link-color">
+                <a th:href="@{/jobs/{id}(id=${id})}" class="nav-link-color nav-link-no-underline">
                     Cancel Changes</a>
             </button>
         </div>
 
-        <form th:action="@{/contacts/delete/{concatId}(contactId=${contactId})}"
+        <form th:action="@{/contacts/delete/{contactId}(contactId=${contactId})}"
               style="margin-bottom: 5px;" method="POST" class="col-md-3">
             <input type="submit" value="Delete Contact" class="btn btn-danger" />
         </form>

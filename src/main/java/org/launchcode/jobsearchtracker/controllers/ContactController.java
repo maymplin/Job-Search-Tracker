@@ -51,6 +51,8 @@ public class ContactController {
             if (!jobListing.getContacts().contains(newContact)) {
                 jobListing.addContact(newContact);
             }
+
+            model.addAttribute("jobId", id);
         }
 
         contactRepository.save(newContact);
@@ -73,6 +75,7 @@ public class ContactController {
             model.addAttribute("subtitle", jobListingRepository.getById(jobId).getJobTitle());
             model.addAttribute("company", jobListingRepository.getById(jobId).getJobListingDetails().getCompany());
             model.addAttribute("contact", theContact);
+            model.addAttribute("id", jobId);
         }
 
         return "contacts/edit-contact";
@@ -103,17 +106,29 @@ public class ContactController {
             contactRepository.save(contact);
         }
 
+//        model.addAttribute("id", jobListingId);
+
         return "redirect:../../jobs/" + String.valueOf(jobListingId);
     }
 
     @PostMapping("/delete/{contactId}")
     public String deleteContact(@PathVariable String contactId, Model model) {
 
+        System.out.println("***** Inside ContactController: deleteContact() *****");
+
         int jobListingId = 0;
 
         Optional<Contact> result = contactRepository.findById(Integer.parseInt(contactId));
 
         if (result.isPresent()) {
+            Contact contact = result.get();
+
+            jobListingId = contact.getJobListings().get(0).getId();
+
+            JobListing jobListing = jobListingRepository.getById(jobListingId);
+            jobListing.removeContact(contact);
+            model.addAttribute("id", jobListingId);
+
             contactRepository.deleteById(Integer.parseInt(contactId));
         }
 

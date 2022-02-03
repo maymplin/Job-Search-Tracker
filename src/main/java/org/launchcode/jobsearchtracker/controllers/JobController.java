@@ -95,8 +95,6 @@ public class JobController {
             model.addAttribute("contacts", jobListing.getContacts());
         }
 
-
-
         return "jobs/jobListing";
     }
 

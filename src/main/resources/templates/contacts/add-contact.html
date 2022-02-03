@@ -51,6 +51,13 @@
         <div class="col-12">
             <input type="submit" value="Add New Contact" class="btn btn-dark"/>
         </div>
+        <div class="col-12">
+            <button class="btn btn-warning">
+                <a th:href="@{/jobs/{id}(id=${id})}" class="nav-link-color nav-link-no-underline">
+                    Cancel Changes
+                </a>
+            </button>
+        </div>
     </form>
 </div>
 
