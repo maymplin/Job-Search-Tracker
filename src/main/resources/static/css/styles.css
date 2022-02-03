@@ -8,6 +8,14 @@
   color: #FBFAF5;
 }
 
+.nav-link-no-underline {
+    text-decoration: none;
+}
+
+.nav-link-color:hover {
+   color: #FBFAF5;
+}
+
 .buttonLink {
   color: white;
 }
@@ -27,6 +35,15 @@ footer {
   background-color: #555;
   color: white;
   padding: 15px;
+}
+
+.div-inline {
+  display: inline-block;
+}
+
+.table-contacts {
+    border: 1px solid #E0E0E0;
+
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */

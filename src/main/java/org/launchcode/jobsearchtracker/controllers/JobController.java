@@ -91,8 +91,9 @@ public class JobController {
             model.addAttribute("listing", jobListing);
             model.addAttribute("details", jobListingDetails);
             model.addAttribute("id", jobListingId);
-        }
 
+            model.addAttribute("contacts", jobListing.getContacts());
+        }
 
         return "jobs/jobListing";
     }
