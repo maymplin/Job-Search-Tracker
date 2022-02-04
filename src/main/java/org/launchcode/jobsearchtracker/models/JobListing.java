@@ -33,6 +33,9 @@ public class JobListing extends AbstractEntity {
     @ManyToMany
     private List<Contact> contacts = new ArrayList<>();
 
+    @OneToMany(mappedBy="jobListing")
+    private List<Appointment> appointments;
+
     public JobListing() {
     }
 
@@ -48,15 +51,6 @@ public class JobListing extends AbstractEntity {
 //        this.company = company;
         this.user = user;
     }
-
-
-//    public JobListing(String jobTilte, String company, boolean jobListingStatus, User user, JobListingDetails jobListingDetails) {
-//        this.jobTilte = jobTilte;
-//        this.company = company;
-//        this.jobListingStatus = jobListingStatus;
-//        this.user = user;
-//        this.jobListingDetails = jobListingDetails;
-//    }
 
     public String getJobTitle() {
         return jobTitle;
@@ -109,4 +103,21 @@ public class JobListing extends AbstractEntity {
     public void removeContact(Contact contact) {
         this.contacts.remove(contact);
     }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
+
+    public void addAppointment(Appointment newAppointment) {
+        appointments.add(newAppointment);
+    }
+
+    public void deleteAppointment(Appointment appointment) {
+        appointments.remove(appointment);
+    }
+
 }
