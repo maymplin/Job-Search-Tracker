@@ -106,8 +106,6 @@ public class ContactController {
             contactRepository.save(contact);
         }
 
-//        model.addAttribute("id", jobListingId);
-
         return "redirect:../../jobs/" + String.valueOf(jobListingId);
     }
 
