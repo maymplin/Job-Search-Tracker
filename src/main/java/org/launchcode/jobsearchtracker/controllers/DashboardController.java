@@ -15,7 +15,6 @@ import java.security.Principal;
 import java.util.Optional;
 
 @Controller
-//@RequestMapping("dashboard")
 public class DashboardController {
 
     @Autowired
@@ -29,7 +28,6 @@ public class DashboardController {
 
 
     @GetMapping("dashboard")
-//    @GetMapping
     public String displayAllJobs (Principal principal, Model model) {
 
         String username = principal.getName();

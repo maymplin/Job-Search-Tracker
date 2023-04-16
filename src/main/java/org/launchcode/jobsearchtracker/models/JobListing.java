@@ -15,10 +15,6 @@ public class JobListing extends AbstractEntity {
     @Size(min=2, max=50, message="Job title must be between 2 and 50 characters")
     private String jobTitle;
 
-//    @NotEmpty
-//    @Size(min=2, max=50, message="Company must be between 2 and 50 characters")
-//    private String company;
-
     private boolean jobListingStatus =  true;
 
     @ManyToOne
